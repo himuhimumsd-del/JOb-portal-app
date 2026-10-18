@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline-variant": "#c4c5d5", "tertiary-container": "#004c8b", "on-secondary-fixed-variant": "#004395", "error": "#ba1a1a", "tertiary": "#003564", "on-tertiary-fixed-variant": "#004883", "on-background": "#131b2e", "surface-dim": "#d2d9f4", "tertiary-fixed": "#d4e3ff", "surface": "#faf8ff", "primary-fixed": "#dde1ff", "on-primary-fixed-variant": "#173bab", "surface-variant": "#dae2fd", "on-surface-variant": "#444653", "surface-container-low": "#f2f3ff", "secondary": "#0058be", "tertiary-fixed-dim": "#a4c9ff", "outline": "#757684", "on-tertiary-container": "#8fbeff", "error-container": "#ffdad6", "surface-tint": "#3755c3", "background": "#faf8ff", "primary-fixed-dim": "#b8c4ff", "primary": "#00288e", "inverse-primary": "#b8c4ff", "on-primary-container": "#a8b8ff", "primary-container": "#1e40af", "on-tertiary": "#ffffff", "surface-container": "#eaedff", "secondary-fixed": "#d8e2ff", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "on-secondary": "#ffffff", "inverse-surface": "#283044", "surface-bright": "#faf8ff", "on-secondary-container": "#fefcff", "on-secondary-fixed": "#001a42", "secondary-container": "#2170e4", "on-error": "#ffffff", "on-error-container": "#93000a", "secondary-fixed-dim": "#adc6ff", "surface-container-high": "#e2e7ff", "inverse-on-surface": "#eef0ff", "on-surface": "#131b2e", "surface-container-highest": "#dae2fd", "on-primary-fixed": "#001453", "on-tertiary-fixed": "#001c39" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.25rem", "space-xl": "1.5rem", "gutter": "1rem", "gutter-sm": "0.75rem", "space-md": "0.75rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-lg": "1rem" }, "fontFamily": { "display-hero": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-hero-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }, "fontSize": { "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "800" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } }</script><style>@layer base{html,body{min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;font-family:'Plus Jakarta Sans',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}body{min-height:max(884px,100dvh);}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col relative"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go Back" class="w-11 h-11 -ml-1 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate ml-0.5">Job Seeker   Job Alerts</h1></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Share or Action" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">more_vert</span></button><div class="w-11 h-11 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_8px_rgba(0,0,0,0.08)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_GdXplMVuSIVDfdC7D9GCuwR9tNxMact4OORTvzt-bXc0ikdP7cyAYTTQfGepoY7DUK8v5haG_CQqoDVwXpQLRdJyzZ9DPMKm-mdIYJv-go0xQ7oP1SdgEExRBsnTqL3z8LoW4VzPcn-uyIvI55CSXyJwsIvUywTokVN2OOtIm788uCOXyQh_U-cUvOtNw_2MFixtjZsFYN_xDZS3dKQAiKzG-7Pu1fYWyJ9kdUtT4CYjMHh5ZMs"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface px-margin-mobile"><div class="flex flex-col w-full pb-24">
+<!-- Top Summary & Quota Card -->
+<section class="mt-2 mb-space-lg">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm">
+<div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-primary-fixed/30 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">notifications_active</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Quota Status</p>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">3 of 5 Alerts Active</h2>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Live Feed
+          </span>
+</div>
+<!-- Quota Progress Indicator -->
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden flex">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500" style="width: 60%"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-1">
+<span>2 slots available for custom filters</span>
+<span class="font-label-md text-label-md text-primary font-bold">60% In Use</span>
+</div>
+<button class="w-full h-12 rounded-lg bg-gradient-to-r from-primary-container to-secondary flex items-center justify-center gap-2 text-on-primary font-label-lg text-label-lg shadow-md active:scale-[0.98] transition-transform" id="open-create-modal-btn">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+          Create New Job Alert
+        </button>
+</div>
+</div>
+</section>
+<!-- Section Header -->
+<div class="flex items-center justify-between mb-space-sm px-0.5">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Active Subscriptions</h3>
+<button class="font-label-md text-label-md text-primary flex items-center gap-1 active:opacity-75">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+      Manage Delivery
+    </button>
+</div>
+<!-- Subscription Cards List -->
+<div class="flex flex-col gap-space-md">
+<!-- Card 1: Design Systems Lead -->
+<article class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden transition-all duration-200">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface-container flex-shrink-0" data-alt="Minimalist geometric avatar logo representing a cutting edge technology company in sleek cobalt blue and pure white backdrop modern vector icon aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxSnUSrXUtqGFfPNs9rwU_fKll9TDoYyehdMDtlknLKrgP8fAQs5aIKc5UKZW5Z6k0DTJs4baQX1bsiauU5DEZMtoN8ajcvGvpZsguwSJIBikHF0W3aDImWy0H20BBLM3IFtzzZHkoZqMFlHN74tj4OnZmkduinUmBwij_lpCIsIFirrLileAuj2Q_YT6oO3FslZp8DnQaKuT2Kj2d4c4jt63y3OyviZF_kYoR4qtRGWMZTvMzWrE"/>
+<div class="min-w-0">
+<h4 class="font-headline-sm text-headline-sm text-on-surface truncate">Design Systems Lead</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+              Architect Level • $170k+ base
+            </p>
+</div>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<!-- Criteria Chips -->
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant">terminal</span>
+          Tokens, Figma Architecture
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant">public</span>
+          Remote US/EU or SF
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          Full-time
+        </span>
+</div>
+<!-- Frequency & Dynamic Stats Pill -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">bolt</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-bold">Instant Push &amp; Daily Digest</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Subscribed via iOS &amp; Email</span>
+</div>
+</div>
+<div class="px-2 py-0.5 rounded-full bg-surface-container-highest text-primary font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          14 new this week
+        </div>
+</div>
+<!-- Card Action Buttons -->
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex-1 h-10 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98] transition-transform">
+<span>View Matches</span>
+<span class="px-1.5 py-0.2 rounded-full bg-white/20 text-on-primary font-label-sm text-label-sm">14</span>
+</button>
+<button class="h-10 px-3 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 active:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+          Edit
+        </button>
+<button class="w-10 h-10 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface flex items-center justify-center active:bg-surface-container-high transition-colors" title="Pause Alert">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+</button>
+</div>
+</article>
+<!-- Card 2: Staff Product Designer -->
+<article class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden transition-all duration-200">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface-container flex-shrink-0" data-alt="Polished high-growth fintech startup brand symbol inside clean rounded badge gradient indigo and soft purple styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjYhTjAGRWBq7yvd38DEHsgA8w6fs34BPZCMTGrRtRGa_HxA8sXr8ElGy5gRwTxW1mmv5nbKdt9lTHN5x-xrNbf9eEeQB9n4m9DyKqX66G7eg-MZINK9nUlpkT8KhNzFEadkGVN5sCK7ON06oUpC-FqZb5oMfI9LyDwe1UrfPibxJ0zd0pp7QVI1wKbCeX8qrwCtiNGIPYjixCX0FGh_stc_mBEflwfKThYNs6Q_dp0BLwSfUIHXI"/>
+<div class="min-w-0">
+<h4 class="font-headline-sm text-headline-sm text-on-surface truncate">Staff Product Designer</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">trending_up</span>
+              Series B+ • $180k - $220k
+            </p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant">location_city</span>
+          SF Bay Area / Hybrid
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant">rocket_launch</span>
+          Scale-up
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          Equity Grants
+        </span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">calendar_today</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-bold">Weekly Digest</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Delivered Mondays at 9:00 AM</span>
+</div>
+</div>
+<div class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          6 new
+        </div>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex-1 h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span>View Matches</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">6</span>
+</button>
+<button class="h-10 px-3 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+          Edit
+        </button>
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface flex items-center justify-center active:bg-surface-container transition-colors" title="Pause Alert">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Paused Alert -->
+<article class="rounded-xl bg-surface-container-low/70 p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden transition-all duration-200 opacity-90">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm min-w-0">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface-container flex-shrink-0 grayscale opacity-80" data-alt="Monochrome geometric tech engineering company insignia on subtle gray canvas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvKJjbTUvJtBOXYxICp2itDFNYfEjnI0_PuEbDR7hFaAKIfJM5aksgxU-HJsKno4OQIgbnwo1n_54RAonM2S_eu8AbzaFuAGcvby1eGMiFAhIBoe_eXvBo6a76L7ooACq5WQNHJkJ9DjFGEyHmKW2jJlHERqTiMipSH4d-TFTHFVo0AgMUPv2aZHYbFqqv1D-rskTnvByTOx1RBQ8HWejcIQtpgs72M8MORgzchxak_AizsQ04w4U"/>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<h4 class="font-headline-sm text-headline-sm text-on-surface truncate">Principal UX Engineer</h4>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+                Paused
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Remote Worldwide • Contract or FT
+            </p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px]">code</span>
+          TypeScript &amp; React
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+          Design Token Tooling
+        </span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-container/60 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+<span class="font-body-sm text-body-sm">Notifications suspended. New matching roles are not being captured.</span>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex-1 h-10 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          Resume Alert
+        </button>
+<button class="h-10 px-3 rounded-lg bg-surface-container text-error font-label-md text-label-md flex items-center justify-center gap-1 active:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete_outline</span>
+          Delete
+        </button>
+</div>
+</article>
+</div>
+<!-- Smart Tips & Delight Section -->
+<section class="mt-space-lg mb-space-md">
+<div class="rounded-xl bg-gradient-to-br from-surface-container-lowest to-surface-container-low p-space-lg shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h4 class="font-label-lg text-label-lg text-on-surface">Pro-Tip for High-Yield Alerts</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Pair broad skill keywords (e.g. <span class="font-semibold text-on-surface">Design Systems</span>) with strict compensation bounds rather than narrow title queries. This delivers up to <span class="font-semibold text-primary">3.2x more eligible executive roles</span> without notification noise.
+        </p>
+</div>
+</div>
+</section>
+<!-- Create Alert Interactive Drawer/Preview Overlay -->
+<div class="fixed inset-x-0 bottom-0 z-50 transform translate-y-full transition-transform duration-300 ease-out max-w-lg mx-auto" id="create-alert-drawer">
+<!-- Backdrop Blur Dimmer -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-backdrop"></div>
+<!-- Sheet Content -->
+<div class="relative bg-surface-container-lowest rounded-t-xl p-space-lg shadow-2xl flex flex-col gap-space-md max-h-[751px] overflow-y-auto">
+<!-- Handle -->
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-1"></div>
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Fast Config</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Create Smart Alert</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" id="close-create-modal-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Keyword Entry -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Role Keywords or Titles</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-12 pl-10 pr-4 rounded-lg bg-surface-container text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary/40" type="text" value="VP of Product Experience, Head of Design"/>
+</div>
+</div>
+<!-- Location Filter -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Location &amp; Work Model</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="h-10 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span> Remote
+          </button>
+<button class="h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center">
+            Hybrid
+          </button>
+<button class="h-10 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center">
+            On-site
+          </button>
+</div>
+</div>
+<!-- Comp Range Slider -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface">Minimum Compensation</label>
+<span class="font-label-lg text-label-lg text-primary font-bold" id="comp-value-display">$190,000 / yr</span>
+</div>
+<input class="w-full accent-primary-container h-2 bg-surface-container rounded-lg cursor-pointer" id="comp-range-input" max="320" min="120" step="10" type="range" value="190"/>
+</div>
+<!-- Push Frequency Picker -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Delivery Frequency</label>
+<div class="flex items-center gap-2">
+<label class="flex-1 p-3 rounded-lg bg-surface-container-low flex flex-col gap-1 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Instant Push</span>
+<input checked="" class="accent-primary-container" name="freq" type="radio"/>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Real-time match alerts</span>
+</label>
+<label class="flex-1 p-3 rounded-lg bg-surface-container-low flex flex-col gap-1 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Daily Digest</span>
+<input class="accent-primary-container" name="freq" type="radio"/>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Aggregated once at 8 AM</span>
+</label>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 h-12 rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg active:bg-surface-container-high transition-colors" id="cancel-drawer-btn">
+          Cancel
+        </button>
+<button class="flex-[2] h-12 rounded-lg bg-gradient-to-r from-primary-container to-secondary text-on-primary font-label-lg text-label-lg shadow-md flex items-center justify-center gap-2 active:scale-[0.98] transition-transform" id="save-alert-btn">
+<span class="material-symbols-outlined text-[20px]">fitbit_jumping_jacks</span>
+          Activate Alert
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initJobAlertsInteractions() {
+    const openBtn = document.getElementById('open-create-modal-btn');
+    const closeBtn = document.getElementById('close-create-modal-btn');
+    const cancelBtn = document.getElementById('cancel-drawer-btn');
+    const saveBtn = document.getElementById('save-alert-btn');
+    const drawer = document.getElementById('create-alert-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const compInput = document.getElementById('comp-range-input');
+    const compDisplay = document.getElementById('comp-value-display');
+
+    function toggleDrawer(open) {
+      if (open) {
+        drawer.classList.remove('translate-y-full');
+        drawer.classList.add('translate-y-0');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100');
+      } else {
+        drawer.classList.add('translate-y-full');
+        drawer.classList.remove('translate-y-0');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        backdrop.classList.remove('opacity-100');
+      }
+    }
+
+    if (openBtn) openBtn.addEventListener('click', () => toggleDrawer(true));
+    if (closeBtn) closeBtn.addEventListener('click', () => toggleDrawer(false));
+    if (cancelBtn) cancelBtn.addEventListener('click', () => toggleDrawer(false));
+    if (backdrop) backdrop.addEventListener('click', () => toggleDrawer(false));
+
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        saveBtn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">refresh</span> Subscribing...';
+        setTimeout(() => {
+          toggleDrawer(false);
+          saveBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">notifications_check</span> Activate Alert';
+        }, 600);
+      });
+    }
+
+    if (compInput && compDisplay) {
+      compInput.addEventListener('input', (e) => {
+        compDisplay.textContent = '$' + e.target.value + ',000 / yr';
+      });
+    }
+  })();
+</script></main></body></html>

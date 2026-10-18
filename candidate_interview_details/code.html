@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline-variant": "#c4c5d5", "tertiary-container": "#004c8b", "on-secondary-fixed-variant": "#004395", "error": "#ba1a1a", "tertiary": "#003564", "on-tertiary-fixed-variant": "#004883", "on-background": "#131b2e", "surface-dim": "#d2d9f4", "tertiary-fixed": "#d4e3ff", "surface": "#faf8ff", "primary-fixed": "#dde1ff", "on-primary-fixed-variant": "#173bab", "surface-variant": "#dae2fd", "on-surface-variant": "#444653", "surface-container-low": "#f2f3ff", "secondary": "#0058be", "tertiary-fixed-dim": "#a4c9ff", "outline": "#757684", "on-tertiary-container": "#8fbeff", "error-container": "#ffdad6", "surface-tint": "#3755c3", "background": "#faf8ff", "primary-fixed-dim": "#b8c4ff", "primary": "#00288e", "inverse-primary": "#b8c4ff", "on-primary-container": "#a8b8ff", "primary-container": "#1e40af", "on-tertiary": "#ffffff", "surface-container": "#eaedff", "secondary-fixed": "#d8e2ff", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "on-secondary": "#ffffff", "inverse-surface": "#283044", "surface-bright": "#faf8ff", "on-secondary-container": "#fefcff", "on-secondary-fixed": "#001a42", "secondary-container": "#2170e4", "on-error": "#ffffff", "on-error-container": "#93000a", "secondary-fixed-dim": "#adc6ff", "surface-container-high": "#e2e7ff", "inverse-on-surface": "#eef0ff", "on-surface": "#131b2e", "surface-container-highest": "#dae2fd", "on-primary-fixed": "#001453", "on-tertiary-fixed": "#001c39" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.25rem", "space-xl": "1.5rem", "gutter": "1rem", "gutter-sm": "0.75rem", "space-md": "0.75rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-lg": "1rem" }, "fontFamily": { "display-hero": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-hero-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }, "fontSize": { "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "800" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } }</script><style>@layer base{html,body{min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;font-family:'Plus Jakarta Sans',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}body{min-height:max(884px,100dvh);}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col relative"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go Back" class="w-11 h-11 -ml-1 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate ml-0.5">Candidate   Interview Details</h1></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Share or Action" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">more_vert</span></button><div class="w-11 h-11 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_8px_rgba(0,0,0,0.08)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_GdXplMVuSIVDfdC7D9GCuwR9tNxMact4OORTvzt-bXc0ikdP7cyAYTTQfGepoY7DUK8v5haG_CQqoDVwXpQLRdJyzZ9DPMKm-mdIYJv-go0xQ7oP1SdgEExRBsnTqL3z8LoW4VzPcn-uyIvI55CSXyJwsIvUywTokVN2OOtIm788uCOXyQh_U-cUvOtNw_2MFixtjZsFYN_xDZS3dKQAiKzG-7Pu1fYWyJ9kdUtT4CYjMHh5ZMs"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface px-margin-mobile"><div class="flex flex-col w-full pb-24 space-y-4">
+<!-- Status Alert Ribbon -->
+<div class="w-full bg-gradient-to-r from-secondary/10 via-primary/5 to-surface-container p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-lowest text-secondary shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">event_available</span>
+<span class="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-label-md text-label-md text-on-surface font-bold">Confirmed</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-label-md text-label-md text-secondary font-bold">In 2 Days</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Google Meet credentials active</p>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2.5 py-1 rounded-full shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[16px] text-secondary">videocam</span>
+<span class="font-label-sm text-label-sm text-on-surface">Meet</span>
+</div>
+</div>
+<!-- Primary Hero Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-4 relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+<!-- Company & Role Header -->
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center p-2 flex-shrink-0 shadow-sm">
+<img class="w-full h-full object-contain rounded-lg" data-alt="Minimalist geometry monochrome enterprise tech company logo Linear App Inc clean vector icon on crisp white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWkLNo9canvBzbuTCcZ4aBHALiqr-UUa0LmBwpEOjVMnysdLU08EckqlecFNOEJnuR3Aa9WcvvLbQ2PkGUCFPCkCounB5zRvZM2zswsboS9ikLOBtaNxPoT5Bs63lQnqxrEBT3GunQtyk3h07GGfPCtaJqYcUDt5x7q9BoCe5O2hGCaCfBUcxFnoiL2u65VW4lUcnaUalM17S9hKvG155lABkG5LF0eH2GeEvtpWdbXxQLpKe8cXc"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface-variant truncate">Linear App Inc.</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Senior Product Designer</h2>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface-variant flex-shrink-0">
+        Stage 2 of 4
+      </span>
+</div>
+<!-- Round Title & Duration -->
+<div class="bg-surface-container-low rounded-lg p-space-md space-y-1">
+<div class="flex items-center justify-between text-on-surface">
+<span class="font-label-lg text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">psychology</span>
+          Round 2: Technical Portfolio &amp; Systems
+        </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium bg-surface-container px-2 py-0.5 rounded-full">45 Mins</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Architecture deep-dive, design token governance, and engineering alignment.</p>
+</div>
+<!-- Date, Time & Timezone Conversion Strip -->
+<div class="space-y-2">
+<div class="flex items-start gap-space-sm text-on-surface">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5 flex-shrink-0">calendar_today</span>
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">Thursday, May 18, 2025</p>
+<p class="font-body-md text-body-md text-on-surface-variant">2:30 PM – 3:15 PM PDT (Host Time)</p>
+</div>
+</div>
+<!-- Candidate Local Timezone Conversion Banner -->
+<div class="flex items-center gap-2 bg-secondary/10 px-3 py-2 rounded-lg text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0">schedule</span>
+<p class="font-label-sm text-label-sm font-bold truncate">
+          Your Local Time: <span class="font-headline-sm text-[13px] text-secondary">5:30 PM – 6:15 PM EDT</span> (New York)
+        </p>
+</div>
+</div>
+<!-- Primary Meeting Link Callout & CTA -->
+<div class="pt-2 space-y-2">
+<div class="flex items-center justify-between bg-surface-container-low px-3 py-2.5 rounded-lg">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0">link</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate">meet.google.com/lin-syst-prd</span>
+</div>
+<button class="flex items-center gap-1 text-label-sm font-label-sm text-secondary hover:text-primary transition-colors flex-shrink-0 font-bold ml-2" id="copy-btn" onclick="copyMeetingLink()">
+<span class="material-symbols-outlined text-[16px]" id="copy-icon">content_copy</span>
+<span id="copy-text">Copy</span>
+</button>
+</div>
+<a class="w-full h-12 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-lg flex items-center justify-center gap-2 text-on-primary font-label-lg text-label-lg font-bold shadow-md" href="https://meet.google.com" target="_blank">
+<span class="material-symbols-outlined text-[20px]">video_call</span>
+        Join Google Meet
+      </a>
+<p class="font-body-sm text-body-sm text-center text-outline flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+        Demo meeting link • Room opens 10 mins prior
+      </p>
+</div>
+<!-- Secondary Add to Calendar Pill Grid -->
+<div class="pt-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant font-bold mb-2">Sync to personal schedule</p>
+<div class="grid grid-cols-3 gap-2">
+<button class="h-9 px-2 bg-surface-container hover:bg-surface-container-high transition-colors rounded-lg flex items-center justify-center gap-1.5 text-on-surface font-label-sm text-label-sm" onclick="calendarToast('Google Calendar')">
+<span class="material-symbols-outlined text-[16px] text-secondary">calendar_month</span>
+          Google
+        </button>
+<button class="h-9 px-2 bg-surface-container hover:bg-surface-container-high transition-colors rounded-lg flex items-center justify-center gap-1.5 text-on-surface font-label-sm text-label-sm" onclick="calendarToast('Apple Calendar')">
+<span class="material-symbols-outlined text-[16px] text-on-surface">phone_iphone</span>
+          Apple
+        </button>
+<button class="h-9 px-2 bg-surface-container hover:bg-surface-container-high transition-colors rounded-lg flex items-center justify-center gap-1.5 text-on-surface font-label-sm text-label-sm" onclick="calendarToast('Outlook')">
+<span class="material-symbols-outlined text-[16px] text-secondary">mail</span>
+          Outlook
+        </button>
+</div>
+</div>
+</div>
+<!-- Interviewer Panel & Dossier Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Interview Panel</h3>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">2 Evaluators</span>
+</div>
+<div class="space-y-3">
+<!-- Lead Interviewer -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-full overflow-hidden flex-shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of Asian female Senior Design Director Maya Lin, friendly natural studio lighting, modern minimalist professional headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKXIoykfWnyVotD0mtk1ZWH-kZKtCg3eEwYyOwhCQGhhTYG4xLkUhoPuP-2QnFilYcELOisqQaLw2cBIQkmL8p32Dhx0Us_dcdacKCnPA_1OwNkOWaYM2ivp_1WavK8Q7VQ11JkUO4-AJEzluTvE63eozZXp2DKTSWI-OUNXfaptx44M8BckSTZjrt60riqIIMyz9W1WV3U34qQ8exvLtIiwOgP3WknoDK8wmSR9HAgqZEft9PCJA"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Maya Lin</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary-fixed/50 px-1.5 py-0.2 rounded">Host</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Sr. Design Director @ Linear</p>
+<p class="font-label-sm text-[10px] text-outline font-semibold">Ex-Airbnb • Systems Lead</p>
+</div>
+</div>
+<a aria-label="Maya Lin LinkedIn" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:bg-surface-container-high transition-colors flex-shrink-0" href="https://linkedin.com" target="_blank">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</a>
+</div>
+<!-- Co-Interviewer -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative w-11 h-11 rounded-full overflow-hidden flex-shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of Hispanic male Staff Systems Engineer Alex Rivera, warm indoor tech office lighting, approachable authentic professional headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJjlm_FRhUudgiip9AKoNyyp-ykanaQVjNFnnn3Hy4YZAjjs1BxlpS0Y8GYb47_t98kipWcLSX7eD67TSbY-K0rsyuvbmlvs4ukcGzCUtj-jeg3kbxtCYsQ-kqHFO5wQOwrYjQkDtTcBPnqgAuKqbG1SUF7K-O11C0swEBSZWZSw4zycMUAieEOXhUTtSUloIljcl0B8NNUBZU7kYzu9HYmmqwnK2DWOYiIInxmmUrNMoCGHXWl_Q"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Alex Rivera</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Staff Systems Engineer</p>
+<p class="font-label-sm text-[10px] text-outline font-semibold">Design Tokens &amp; React Core</p>
+</div>
+</div>
+<a aria-label="Alex Rivera LinkedIn" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:bg-surface-container-high transition-colors flex-shrink-0" href="https://linkedin.com" target="_blank">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Candidate Preparation Instructions & Checklist Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">assignment</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Preparation &amp; Brief</h3>
+</div>
+<!-- Guidance Paragraph -->
+<div class="p-3 bg-surface-container-low rounded-lg text-on-surface">
+<p class="font-body-md text-body-md leading-relaxed">
+        Please prepare a <span class="font-bold text-primary">20-minute walkthrough</span> of 1–2 complex enterprise design systems projects focusing on token taxonomy and developer handoff. A <span class="font-bold text-primary">15-minute technical Q&amp;A</span> will follow.
+      </p>
+</div>
+<!-- Prep Checklist -->
+<div class="space-y-2">
+<span class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider">Candidate Readiness Checklist</span>
+<div class="space-y-2">
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface hover:bg-surface-container-low transition-colors cursor-pointer select-none">
+<input checked="" class="mt-0.5 rounded text-secondary focus:ring-0 w-4 h-4" type="checkbox"/>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface block">Figma Link or Slide Deck Pre-loaded</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ensure browser permissions allow screen share.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface hover:bg-surface-container-low transition-colors cursor-pointer select-none">
+<input checked="" class="mt-0.5 rounded text-secondary focus:ring-0 w-4 h-4" type="checkbox"/>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface block">Component Architecture Examples</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Be ready to discuss naming conventions &amp; sync tools.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface hover:bg-surface-container-low transition-colors cursor-pointer select-none">
+<input class="mt-0.5 rounded text-secondary focus:ring-0 w-4 h-4" type="checkbox"/>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface block">Quiet Environment &amp; Headphones</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Test microphone latency 10 minutes prior.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Rescheduling & Cancellation Request Section -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">manage_history</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Need to Make Changes?</h3>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg">
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+        Requests are sent directly to the recruiting coordinator and will <span class="font-bold text-on-surface">NOT automatically alter your confirmed slot</span> until accepted by Linear App Inc.
+      </p>
+</div>
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full h-11 bg-surface-container-high hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center gap-2 text-on-surface font-label-lg text-label-lg font-bold" onclick="toggleRescheduleModal(true)">
+<span class="material-symbols-outlined text-[18px] text-secondary">update</span>
+        Request Reschedule
+      </button>
+<button class="w-full h-11 bg-surface-container-lowest hover:bg-error-container/30 transition-colors rounded-lg flex items-center justify-center gap-2 text-error font-label-md text-label-md font-bold" onclick="toggleDeclineModal(true)">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+        Decline / Cancel Interview
+      </button>
+</div>
+</div>
+<!-- Security & Dial-in Expiration Callout -->
+<div class="w-full bg-surface-container-low/70 rounded-xl p-space-md flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5 flex-shrink-0">lock_clock</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      Dial-in credentials and room links automatically expire upon meeting conclusion or cancellation. Recorded transcriptions are subject to candidate consent.
+    </p>
+</div>
+<!-- Toast Container for Delight Feedback -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transform transition-all duration-300 opacity-0 pointer-events-none translate-y-4" id="toast-pill">
+<div class="bg-inverse-surface text-inverse-on-surface font-label-md text-label-md px-4 py-2.5 rounded-full shadow-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed" id="toast-icon">check_circle</span>
+<span id="toast-message">Meeting link copied to clipboard</span>
+</div>
+</div>
+<!-- Reschedule Modal Overlay -->
+<div class="fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4" id="reschedule-modal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-t-2xl sm:rounded-2xl p-6 space-y-4 shadow-2xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">event_repeat</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Request Reschedule</h4>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" onclick="toggleRescheduleModal(false)">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Select your preferred availability window. The Linear team will follow up within 24 hours.
+      </p>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface font-bold">Suggested Date Window</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="p-2.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold active:scale-95 text-left" type="button">
+            Friday, May 19
+            <span class="block text-[11px] text-on-surface-variant font-normal">Morning (9am - 12pm)</span>
+</button>
+<button class="p-2.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold active:scale-95 text-left" type="button">
+            Monday, May 22
+            <span class="block text-[11px] text-on-surface-variant font-normal">Afternoon (1pm - 5pm)</span>
+</button>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-bold">Reason (Optional)</label>
+<textarea class="w-full p-2.5 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none resize-none" placeholder="e.g., Unforeseen client scheduling conflict..." rows="2"></textarea>
+</div>
+<div class="flex gap-2 pt-2">
+<button class="flex-1 h-11 bg-surface-container text-on-surface rounded-lg font-label-md text-label-md font-bold" onclick="toggleRescheduleModal(false)">Keep Existing</button>
+<button class="flex-1 h-11 bg-primary text-on-primary rounded-lg font-label-md text-label-md font-bold" onclick="submitReschedule()">Submit Request</button>
+</div>
+</div>
+</div>
+<!-- Decline Modal Overlay -->
+<div class="fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4" id="decline-modal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-t-2xl sm:rounded-2xl p-6 space-y-4 shadow-2xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined">warning</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Decline Interview</h4>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" onclick="toggleDeclineModal(false)">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Are you sure you want to withdraw from this interview stage? This action notifies the recruiting team and releases your reserved slot.
+      </p>
+<div class="flex gap-2 pt-2">
+<button class="flex-1 h-11 bg-surface-container text-on-surface rounded-lg font-label-md text-label-md font-bold" onclick="toggleDeclineModal(false)">Go Back</button>
+<button class="flex-1 h-11 bg-error text-on-error rounded-lg font-label-md text-label-md font-bold" onclick="submitDecline()">Yes, Decline</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function showToast(message, icon = 'check_circle') {
+    const pill = document.getElementById('toast-pill');
+    const msg = document.getElementById('toast-message');
+    const ico = document.getElementById('toast-icon');
+    if (!pill || !msg || !ico) return;
+
+    msg.innerText = message;
+    ico.innerText = icon;
+    pill.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+    pill.classList.add('opacity-100', 'translate-y-0');
+
+    setTimeout(() => {
+      pill.classList.remove('opacity-100', 'translate-y-0');
+      pill.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+    }, 2800);
+  }
+
+  function copyMeetingLink() {
+    navigator.clipboard?.writeText('https://meet.google.com/lin-syst-prd');
+    const copyText = document.getElementById('copy-text');
+    const copyIcon = document.getElementById('copy-icon');
+    if (copyText && copyIcon) {
+      copyText.innerText = 'Copied!';
+      copyIcon.innerText = 'done';
+      setTimeout(() => {
+        copyText.innerText = 'Copy';
+        copyIcon.innerText = 'content_copy';
+      }, 2000);
+    }
+    showToast('Meeting link copied to clipboard');
+  }
+
+  function calendarToast(provider) {
+    showToast('Synced to ' + provider, 'event_upcoming');
+  }
+
+  function toggleRescheduleModal(show) {
+    const modal = document.getElementById('reschedule-modal');
+    if (!modal) return;
+    if (show) modal.classList.remove('hidden');
+    else modal.classList.add('hidden');
+  }
+
+  function toggleDeclineModal(show) {
+    const modal = document.getElementById('decline-modal');
+    if (!modal) return;
+    if (show) modal.classList.remove('hidden');
+    else modal.classList.add('hidden');
+  }
+
+  function submitReschedule() {
+    toggleRescheduleModal(false);
+    showToast('Reschedule request sent to recruiting team', 'mark_email_read');
+  }
+
+  function submitDecline() {
+    toggleDeclineModal(false);
+    showToast('Interview invitation declined', 'event_busy');
+  }
+</script></main></body></html>

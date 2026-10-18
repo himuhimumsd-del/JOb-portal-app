@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline-variant": "#c4c5d5", "tertiary-container": "#004c8b", "on-secondary-fixed-variant": "#004395", "error": "#ba1a1a", "tertiary": "#003564", "on-tertiary-fixed-variant": "#004883", "on-background": "#131b2e", "surface-dim": "#d2d9f4", "tertiary-fixed": "#d4e3ff", "surface": "#faf8ff", "primary-fixed": "#dde1ff", "on-primary-fixed-variant": "#173bab", "surface-variant": "#dae2fd", "on-surface-variant": "#444653", "surface-container-low": "#f2f3ff", "secondary": "#0058be", "tertiary-fixed-dim": "#a4c9ff", "outline": "#757684", "on-tertiary-container": "#8fbeff", "error-container": "#ffdad6", "surface-tint": "#3755c3", "background": "#faf8ff", "primary-fixed-dim": "#b8c4ff", "primary": "#00288e", "inverse-primary": "#b8c4ff", "on-primary-container": "#a8b8ff", "primary-container": "#1e40af", "on-tertiary": "#ffffff", "surface-container": "#eaedff", "secondary-fixed": "#d8e2ff", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "on-secondary": "#ffffff", "inverse-surface": "#283044", "surface-bright": "#faf8ff", "on-secondary-container": "#fefcff", "on-secondary-fixed": "#001a42", "secondary-container": "#2170e4", "on-error": "#ffffff", "on-error-container": "#93000a", "secondary-fixed-dim": "#adc6ff", "surface-container-high": "#e2e7ff", "inverse-on-surface": "#eef0ff", "on-surface": "#131b2e", "surface-container-highest": "#dae2fd", "on-primary-fixed": "#001453", "on-tertiary-fixed": "#001c39" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.25rem", "space-xl": "1.5rem", "gutter": "1rem", "gutter-sm": "0.75rem", "space-md": "0.75rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-lg": "1rem" }, "fontFamily": { "display-hero": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-hero-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }, "fontSize": { "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.025em", "fontWeight": "800" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } }</script><style>@layer base{html,body{min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;font-family:'Plus Jakarta Sans',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}body{min-height:max(884px,100dvh);}</style></head><body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col relative"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="TalentNexus Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UsVtq8PuuR1U51Ti6f8t7rkIshqGgglcATPvdSUs5u_1USz2mAYuBXlvc6krwj-Dp4hY7Nqn4ZwnLdcL2UfjqinUE4JWp_9fs7uKYsPfbjjldwGqW_80m7XUlIM_aDTG-FfsEV92jxz-iWYaf-Mi-qlNB-IRYBgAuKVAu08jPJOqwfc9PIQC61Qo8PnxidYxNvj-mhMn0kGFqbZg08265ZWtwBkGzI5T0uzQztI6NYh9F_t-u9SCrhsw"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate hidden xs:inline">TalentNexus</span></div><div class="flex flex-col items-center justify-center text-center px-space-xs truncate flex-1"><span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 leading-none"><span class="material-symbols-outlined text-[13px] text-secondary">location_on</span> San Francisco, CA</span><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate mt-0.5">Job Seeker   Saved</span></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Notifications" class="w-11 h-11 relative flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button><a class="relative flex items-center justify-center w-11 h-11 rounded-full p-1" data-path="job-seeker-profile" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_8px_rgba(0,0,0,0.08)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_GdXplMVuSIVDfdC7D9GCuwR9tNxMact4OORTvzt-bXc0ikdP7cyAYTTQfGepoY7DUK8v5haG_CQqoDVwXpQLRdJyzZ9DPMKm-mdIYJv-go0xQ7oP1SdgEExRBsnTqL3z8LoW4VzPcn-uyIvI55CSXyJwsIvUywTokVN2OOtIm788uCOXyQh_U-cUvOtNw_2MFixtjZsFYN_xDZS3dKQAiKzG-7Pu1fYWyJ9kdUtT4CYjMHh5ZMs"/></a></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-surface px-margin-mobile"><div class="flex flex-col w-full pb-6 space-y-4">
+<!-- Toast Notification (Hidden by default, triggered on bookmark tap) -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-inverse-surface text-inverse-on-surface shadow-xl text-body-sm font-body-sm opacity-0 pointer-events-none transition-all duration-300" id="toast-notification">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">bookmark_check</span>
+<span id="toast-text">Removed from saved roles</span>
+</div>
+<!-- Header Banner & Stats Section -->
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Saved Opportunities</h1>
+<span class="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          8 Roles
+        </span>
+</div>
+<button aria-label="Sort options" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onclick="toggleSortMenu()">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Review deadlines, compare match scores, and finalize applications.</p>
+</div>
+<!-- Search & Filter Bar -->
+<div class="relative w-full">
+<div class="w-full h-12 bg-surface-container-lowest rounded-xl shadow-sm flex items-center px-3 gap-2.5 transition-all focus-within:shadow-md">
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">search</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none" id="saved-search-input" placeholder="Search saved jobs or company..." type="text"/>
+<button aria-label="Clear search" class="hidden text-outline hover:text-on-surface transition-colors p-1" id="clear-search" onclick="clearSearchInput()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<button aria-label="Filter parameters" class="shrink-0 w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Segmented Filter Pills (Horizontal Scrollable) -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-margin-mobile px-margin-mobile">
+<button class="filter-pill whitespace-nowrap px-3.5 py-1.5 rounded-full font-label-md text-label-md transition-all shrink-0 bg-primary-container text-on-primary shadow-sm" data-filter="all">
+      All Saved (8)
+    </button>
+<button class="filter-pill whitespace-nowrap px-3.5 py-1.5 rounded-full font-label-md text-label-md transition-all shrink-0 bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="expiring">
+      Expiring Soon (2)
+    </button>
+<button class="filter-pill whitespace-nowrap px-3.5 py-1.5 rounded-full font-label-md text-label-md transition-all shrink-0 bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="hiring">
+      Actively Hiring (5)
+    </button>
+<button class="filter-pill whitespace-nowrap px-3.5 py-1.5 rounded-full font-label-md text-label-md transition-all shrink-0 bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="applied">
+      Applied (1)
+    </button>
+</div>
+<!-- Saved Jobs List -->
+<div class="flex flex-col space-y-3.5" id="jobs-container">
+<!-- Job Card 1: Linear (Expiring Soon) -->
+<article class="job-card relative bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-category="expiring hiring">
+<!-- Header Meta -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="High tech minimalist geometric glyph logo for Linear software in clean monochrome aesthetic with vibrant subtle blue undertone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9iY6flM79ip2GLdu3ro-xL1mSh6c8W8FXkDfx7UOlU9nRJJtOKe89JUrT60SIB7z6qpXw4ijvuY325fVvCR3fDMt6hiBDuIV86Zd5iao27NB1nB3J1q4fpVdm0sRhgbM-j70uWZgrW1kLqtd36rfCbO8cqn7z69EO6s6ICSTzdS1kI_4B3R4onN_mu4uW7wzoISGQRIxPbEMWh0JrSyFmeX1I3QOiU-6Jyb8BqBa2mr9OLizO0Dg"/>
+</div>
+<div class="min-w-0 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+              Linear
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Remote
+            </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Senior Product Designer</h2>
+</div>
+</div>
+<button aria-label="Toggle Bookmark" class="bookmark-btn w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary transition-transform active:scale-90" onclick="handleBookmarkToggle(this, 'Linear')">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<!-- Compensation & Badges -->
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="font-label-md text-label-md font-bold text-on-surface bg-surface-container px-2.5 py-1 rounded-md">
+          $160k - $190k
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+          98% Match
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-error-container text-on-error-container font-label-sm text-label-sm font-bold animate-pulse">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+          Closes in 3 days
+        </span>
+</div>
+<!-- Sub-info Microcopy -->
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">history</span>
+          Saved 2d ago
+        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Full-time • Series B</span>
+</div>
+<!-- Action Row -->
+<div class="pt-1 flex items-center gap-2">
+<button class="flex-1 h-11 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center">
+          View Job
+        </button>
+<button class="flex-1 h-11 rounded-xl bg-gradient-to-r from-primary-container to-secondary text-on-primary font-label-md text-label-md shadow-sm active:scale-98 transition-all flex items-center justify-center gap-1.5">
+<span>Easy Apply</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Job Card 2: Vercel (High Match) -->
+<article class="job-card relative bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-category="hiring">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Monochrome sharp triangular modern logo symbol for modern cloud hosting platform Vercel against studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9x2x4PcVw5SOG00dnNE9lTZgLOfjpG3_SdrmA9xqOJBzSL5rEZZoQSLwoRcV4A4CjH2R-b29tRrAB5c8LR4AO3_0FfwieOexhETDFyVPiDnp3liEyXkGq9oZ3yxGDR-UJ-v5ogj2dsRaPCZyv1PnUyJjeAaOcD9G8FGHcDF7caPqD9S-bWyHZj4jlwSSIKnkjz9jdDwcL6p4gZIEJjgD2LRZDzx5n4Rqio96Xytm0ObW_ATO6f6k"/>
+</div>
+<div class="min-w-0 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+              Vercel
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              SF / Remote
+            </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Staff Design Systems Architect</h2>
+</div>
+</div>
+<button aria-label="Toggle Bookmark" class="bookmark-btn w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary transition-transform active:scale-90" onclick="handleBookmarkToggle(this, 'Vercel')">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="font-label-md text-label-md font-bold text-on-surface bg-surface-container px-2.5 py-1 rounded-md">
+          $190k - $230k
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+          95% Match
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+          Equity (0.05%)
+        </span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">history</span>
+          Saved 4d ago
+        </span>
+<span class="inline-flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Actively Reviewing
+        </span>
+</div>
+<div class="pt-1 flex items-center gap-2">
+<button aria-label="Remove Bookmark" class="w-11 h-11 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors flex items-center justify-center shrink-0" onclick="removeCard(this)">
+<span class="material-symbols-outlined text-[20px]">delete_outline</span>
+</button>
+<button class="flex-1 h-11 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-98 transition-all flex items-center justify-center gap-1.5">
+<span>Apply Now</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</article>
+<!-- Job Card 3: Airbnb -->
+<article class="job-card relative bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-category="hiring">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Warm welcoming hospitality tech emblem for Airbnb with subtle curved lines and soft ambient gradient studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwid2UsV130rc4qYd_OC6CNgtMTvpfjvzsMbEef0md3E9o4_CBRerQecgA_pCuT8ahLpfZvD9Ewy7rmxXTLLKiDtkgV1RTveEVk9ottFnliE03Y23fNXoaoaEOni2jyOvWQDRyjhvZwW70Y0oEJipc8Lg355gBjn_EWDAQJSm6f801mqZFzaNV-x_p9ga2AKqlsar8f0XSIZKSBAxCgy7e7oHdFRdnPk0osoSN4FY5Vs6z0-Q2VaI"/>
+</div>
+<div class="min-w-0 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+              Airbnb
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Hybrid SF
+            </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Lead Interaction Designer</h2>
+</div>
+</div>
+<button aria-label="Toggle Bookmark" class="bookmark-btn w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary transition-transform active:scale-90" onclick="handleBookmarkToggle(this, 'Airbnb')">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="font-label-md text-label-md font-bold text-on-surface bg-surface-container px-2.5 py-1 rounded-md">
+          $180k - $210k
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+          91% Match
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+          Design Core
+        </span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">history</span>
+          Saved 1w ago
+        </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">3 teammates applied</span>
+</div>
+<div class="pt-1 flex items-center gap-2">
+<button class="flex-1 h-11 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center">
+          View Details
+        </button>
+<button class="flex-1 h-11 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow-sm active:scale-98 transition-all flex items-center justify-center gap-1.5">
+<span>Apply</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Job Card 4: Stripe (Applied Status) -->
+<article class="job-card relative bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col gap-3 group" data-category="applied">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Sleek modern fintech brand symbol for Stripe with bold diagonal stripes against deep blue canvas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoy70IrF8GINSnvBq3Q6ryLUPHQESU-YFd67Ite1zNtzu1TGVWRUBWYqUl37rQ4euE-Mjbc8jWvUT2VINlgJhWlhwZMYIFqVUPWHc6hqMfWmdsMqxQlj2twgFAVMOa_esnsh3kqlztS_SkwEEJxAyCGfadOWE26LzTZgZjkx8cIO0pzE-Do1whctVJcgLlac07beBxiLw_pxAwKOyyt8vdwAPHddvAQSxzagGT5zdvg2nePIsEyPQ"/>
+</div>
+<div class="min-w-0 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+              Stripe
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Remote US
+            </span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Principal UI Architect</h2>
+</div>
+</div>
+<button aria-label="Toggle Bookmark" class="bookmark-btn w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary transition-transform active:scale-90" onclick="handleBookmarkToggle(this, 'Stripe')">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="font-label-md text-label-md font-bold text-on-surface bg-surface-container px-2.5 py-1 rounded-md">
+          $210k - $250k
+        </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[15px] text-secondary">check_circle</span>
+          Application Submitted
+        </span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">history</span>
+          Saved 2w ago
+        </span>
+<span class="font-label-sm text-label-sm text-secondary">In Review (Step 2)</span>
+</div>
+<div class="pt-1 flex items-center gap-2">
+<button class="w-full h-11 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">timeline</span>
+<span>Track Application Status</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Smart Match / Job Alert Collapsible Helper Card -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface-container to-surface-variant p-4 shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[20px]">notifications_active</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Automated Match Alert</h3>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">AI Powered</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          Want new matches tailored to your saved parameters? Receive immediate notifications as soon as matching high-yield roles open.
+        </p>
+<div class="mt-3 flex items-center gap-2">
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-xs active:scale-98 transition-all flex items-center gap-1.5" onclick="triggerAlertSetup(this)">
+<span class="material-symbols-outlined text-[16px]">add_alert</span>
+<span>Create Job Alert</span>
+</button>
+<button class="px-3 py-2 rounded-xl text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" onclick="this.closest('.relative').remove()">
+            Dismiss
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Visual Simulation Prototype Notice -->
+<div class="flex items-center justify-center gap-1.5 py-2 text-center text-outline">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span class="font-label-sm text-label-sm">Demo prototype: Job data for visual simulation</span>
+</div>
+</div>
+<script>
+  // Bookmark button interactive state
+  function handleBookmarkToggle(button, company) {
+    const icon = button.querySelector('.material-symbols-outlined');
+    const isSaved = icon.style.fontVariationSettings.includes("'FILL' 1");
+    
+    if (isSaved) {
+      icon.style.fontVariationSettings = "'FILL' 0";
+      button.classList.remove('text-primary');
+      button.classList.add('text-outline');
+      showToast(`Removed ${company} from saved roles`);
+    } else {
+      icon.style.fontVariationSettings = "'FILL' 1";
+      button.classList.remove('text-outline');
+      button.classList.add('text-primary');
+      showToast(`Saved ${company} to bookmarks`);
+    }
+  }
+
+  // Remove card with subtle transition
+  function removeCard(button) {
+    const card = button.closest('.job-card');
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      card.remove();
+      showToast('Role removed from your list');
+    }, 200);
+  }
+
+  // Filter Pills functionality
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const jobCards = document.querySelectorAll('.job-card');
+
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => {
+        p.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+        p.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      pill.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      pill.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+
+      const filterValue = pill.getAttribute('data-filter');
+      jobCards.forEach(card => {
+        if (filterValue === 'all') {
+          card.style.display = 'flex';
+        } else {
+          const categories = card.getAttribute('data-category') || '';
+          if (categories.includes(filterValue)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+
+  // Search Input live filter
+  const searchInput = document.getElementById('saved-search-input');
+  const clearBtn = document.getElementById('clear-search');
+
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    clearBtn.classList.toggle('hidden', query.length === 0);
+
+    jobCards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  function clearSearchInput() {
+    searchInput.value = '';
+    clearBtn.classList.add('hidden');
+    jobCards.forEach(card => card.style.display = 'flex');
+    searchInput.focus();
+  }
+
+  // Dynamic Toast trigger
+  let toastTimeout;
+  function showToast(message) {
+    const toast = document.getElementById('toast-notification');
+    const toastText = document.getElementById('toast-text');
+    toastText.textContent = message;
+    
+    clearTimeout(toastTimeout);
+    toast.classList.remove('opacity-0', 'pointer-events-none');
+    toast.classList.add('opacity-100');
+
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+    }, 2400);
+  }
+
+  // Job Alert Creation feedback
+  function triggerAlertSetup(button) {
+    button.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Alert Created!';
+    button.classList.add('bg-secondary');
+    showToast('Weekly digest configured for saved criteria');
+  }
+
+  function toggleSortMenu() {
+    showToast('Sorting by: Recently Saved');
+  }
+</script></main><div class="fixed bottom-0 inset-x-0 z-50 pb-safe pointer-events-none flex justify-center px-margin-mobile mb-4"><nav class="pointer-events-auto h-16 w-full max-w-md bg-inverse-surface/95 backdrop-blur-2xl rounded-full p-1.5 flex items-center justify-between shadow-[0_12px_36px_0_rgba(15,23,42,0.25)]" data-active-classes="bg-surface-container-lowest text-inverse-surface shadow-[0_0_16px_rgba(255,255,255,0.4)]"><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-outline-variant hover:text-inverse-on-surface transition-all duration-200 min-w-0" data-path="job-seeker-home" href="#"><span class="material-symbols-outlined text-[20px] leading-none">home</span><span class="font-label-sm text-[10px] leading-tight font-semibold tracking-tight">Home</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-outline-variant hover:text-inverse-on-surface transition-all duration-200 min-w-0" data-path="job-seeker-explore" href="#"><span class="material-symbols-outlined text-[20px] leading-none">travel_explore</span><span class="font-label-sm text-[10px] leading-tight font-semibold tracking-tight">Explore</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-outline-variant hover:text-inverse-on-surface transition-all duration-200 min-w-0" data-path="job-seeker-my-applications" href="#"><span class="material-symbols-outlined text-[20px] leading-none">work_outline</span><span class="font-label-sm text-[10px] leading-tight font-semibold tracking-tight">Applications</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-outline-variant hover:text-inverse-on-surface transition-all duration-200 min-w-0" data-path="job-seeker-saved" href="#"><span class="material-symbols-outlined text-[20px] leading-none">bookmark</span><span class="font-label-sm text-[10px] leading-tight font-semibold tracking-tight">Saved</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-outline-variant hover:text-inverse-on-surface transition-all duration-200 min-w-0" data-path="job-seeker-profile" href="#"><span class="material-symbols-outlined text-[20px] leading-none">person</span><span class="font-label-sm text-[10px] leading-tight font-semibold tracking-tight">Profile</span></a></nav></div></body></html>

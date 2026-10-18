@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="admin_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}body{min-height:max(884px,100dvh);}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary-container":"#2170e4","on-primary-container":"#a8b8ff","tertiary-fixed":"#d4e3ff","surface-container-low":"#f2f3ff","on-error":"#ffffff","on-surface":"#131b2e","primary-fixed-dim":"#b8c4ff","inverse-primary":"#b8c4ff","error":"#ba1a1a","on-primary-fixed-variant":"#173bab","surface-container":"#eaedff","surface":"#faf8ff","inverse-surface":"#283044","on-surface-variant":"#444653","on-secondary-fixed-variant":"#004395","on-secondary-fixed":"#001a42","on-tertiary":"#ffffff","outline":"#757684","error-container":"#ffdad6","on-error-container":"#93000a","on-tertiary-fixed":"#001c39","primary-container":"#1e40af","primary-fixed":"#dde1ff","secondary":"#0058be","on-tertiary-container":"#8fbeff","on-secondary-container":"#fefcff","on-tertiary-fixed-variant":"#004883","surface-container-lowest":"#ffffff","secondary-fixed-dim":"#adc6ff","surface-dim":"#d2d9f4","tertiary-container":"#004c8b","background":"#faf8ff","on-primary-fixed":"#001453","on-background":"#131b2e","surface-bright":"#faf8ff","on-primary":"#ffffff","surface-container-high":"#e2e7ff","inverse-on-surface":"#eef0ff","surface-variant":"#dae2fd","surface-container-highest":"#dae2fd","tertiary":"#003564","on-secondary":"#ffffff","surface-tint":"#3755c3","secondary-fixed":"#d8e2ff","primary":"#00288e","tertiary-fixed-dim":"#a4c9ff","outline-variant":"#c4c5d5"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"gutter-sm":"0.75rem","space-lg":"1rem","space-xl":"1.5rem","gutter":"1rem","space-md":"0.75rem","margin-mobile":"1rem","space-xs":"0.25rem","margin":"1.25rem","space-sm":"0.5rem"},fontFamily:{"headline-sm":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"]},fontSize:{"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"800"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"display-hero-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.025em","fontWeight":"800"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go Back" class="w-11 h-11 -ml-1 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex items-center gap-2 min-w-0"><div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm"><span class="material-symbols-outlined text-[18px]">admin_panel_settings</span></div><h1 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight truncate">Admin   Reported Content Detail</h1></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Stack Actions" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">more_vert</span></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen px-margin-mobile"><div class="flex flex-col w-full pb-28 space-y-4">
+<!-- Incident Severity & Alert Banner -->
+<div class="w-full bg-error-container text-on-error-container rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between gap-space-sm relative z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[22px]" style="font-variation-settings: 'FILL' 1;">gpp_maybe</span>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-error font-bold block">Incident #REP-4091</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-error-container">Critical Severity Flag</h2>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error text-on-error font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface animate-ping"></span>
+        Action Required
+      </span>
+</div>
+<div class="mt-3 p-2.5 rounded-lg bg-surface-container-lowest/80 text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+<span class="font-label-md text-label-md font-bold text-error">Suspicious Recruiter Impersonation &amp; Fee Solicitation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+        Multiple candidate safety tripwires breached within 48 hours of organization registration.
+      </p>
+</div>
+</div>
+<!-- Reported Entity Overview Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary font-bold font-headline-sm">
+          CV
+        </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Cryptix Venture Group</h3>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">Frozen</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ID: ORG-9921 • Registered 3d ago</span>
+</div>
+</div>
+<button aria-label="Entity options" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+</button>
+</div>
+<!-- Associated Job Listing Details -->
+<div class="bg-surface-container-low rounded-lg p-space-sm space-y-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Flagged Job Posting</span>
+<div class="flex items-start justify-between gap-2">
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">High Yield Crypto Research Associate</p>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-error text-[16px]">link_off</span>
+<span class="font-body-sm text-body-sm text-error">Unverified external link redirection detected</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-surface-container-highest text-on-surface font-label-sm text-label-sm rounded-md shrink-0">
+          $120k – $160k
+        </span>
+</div>
+</div>
+</div>
+<!-- Reporter Submission & Evidence -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">record_voice_over</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Candidate Report</h3>
+</div>
+<span class="font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed font-bold px-2 py-0.5 rounded-full">
+        2 Submissions
+      </span>
+</div>
+<!-- Reporters meta -->
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-[12px]">
+          ER
+        </div>
+<div>
+<span class="font-semibold text-on-surface">Elena Rostova</span>
+<span class="text-secondary font-medium ml-1">• Verified Candidate</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">+1 applicant</span>
+</div>
+<!-- Incident Category Tag -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+      Fee Solicitation / Advance Fee Fraud
+    </div>
+<!-- Quoted Statement -->
+<div class="relative pl-3.5 pr-2 py-2 bg-surface-container-low rounded-lg">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error rounded-l"></div>
+<p class="font-body-md text-body-md text-on-surface italic">
+        “The recruiter asked me to purchase proprietary training software for $450 before scheduling the panel interview via a private Telegram link.”
+      </p>
+</div>
+<!-- Evidence Attachment Card -->
+<div class="pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold block mb-2">Attached Proof</span>
+<div class="relative rounded-lg overflow-hidden bg-surface-container group shadow-inner">
+<div class="w-full h-36 bg-cover bg-center" data-alt="A smartphone screenshot showing a secure dark chat application interface where a scam recruiter aggressively demands a 450 dollar cryptocurrency training software fee before an interview." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHxhTdTpvgjO0N13ahoEpNWlGf-A6N54FwJ7r-NsVcbPLgTz5bgkGYVhrQOD9nMPltaFl4ryS2IKZy-wWvWhBncL1NiAv58khYSmUhh42WvXAxRRWxeniYhPs8KGOc2IoQUxBqev7E15zWAgdnVrjO6WL8oihG9xJi53NkFB1Ph4XDol7AcOv0Th8BDD-rhwXRvnSqeKsbb5Ehq-5guM0fabSTMUW6-pLnweyZFaL1_qg42gUyuws')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/30 to-transparent flex items-end justify-between p-space-sm text-surface">
+<div>
+<p class="font-label-md text-label-md font-bold text-surface">chat_transcript_deposit_demand.png</p>
+<p class="font-label-sm text-label-sm text-surface-variant opacity-80">1.4 MB • Uploaded 2h ago</p>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md font-bold flex items-center gap-1 shadow-md hover:bg-surface-bright active:scale-95 transition-transform" onclick="alert('Viewing full resolution evidence document...')">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+            View Full
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Automated Policy Checklist -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">fact_check</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Compliance Assessment</h3>
+</div>
+<span class="font-label-sm text-label-sm text-error font-bold">3 Violations Auto-Detected</span>
+</div>
+<div class="space-y-2">
+<!-- Item 1 -->
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md font-bold text-on-surface">External telegram / unverified channel detected</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Links lead to private off-platform handler @cryptix_recruiter_direct</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md font-bold text-on-surface">Payment request violates Terms Section 4.2</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zero-tolerance clause for candidate onboarding/equipment pre-fees</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md font-bold text-on-surface">Domain WHOIS registered &lt; 14 days ago</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Host registrar flagged for disposable shell business activity</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Reviewer Decision Controls & Actions -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">gavel</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Admin Decision</h3>
+</div>
+<!-- Blacklist Scope Checklist -->
+<div class="space-y-2.5 bg-surface-container-low p-space-sm rounded-lg">
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface-variant block">Blacklist Scope Enforcements</span>
+<label class="flex items-center gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary" id="scope-email" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Blacklist email domain (<code class="bg-surface-container px-1 py-0.5 rounded text-error font-mono text-[11px]">*@cryptix-ventures.io</code>)</span>
+</label>
+<label class="flex items-center gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary" id="scope-ip" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Blacklist corporate IP cluster (AS49102 - 185.220.*)</span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-2 pt-1">
+<button class="w-full h-12 bg-error text-on-error rounded-lg font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-transform" onclick="confirmBlacklist()">
+<span class="material-symbols-outlined text-[20px]">block</span>
+        Permanently Remove &amp; Blacklist Domain
+      </button>
+<button class="w-full h-11 bg-surface-container text-on-surface rounded-lg font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 hover:bg-surface-container-high active:scale-[0.98] transition-transform" onclick="issueWarning()">
+<span class="material-symbols-outlined text-[18px]">announcement</span>
+        Issue Formal Policy Warning
+      </button>
+<button class="w-full py-2.5 text-on-surface-variant font-label-md text-label-md font-semibold text-center hover:text-on-surface active:opacity-75 transition-opacity" onclick="dismissReport()">
+        Dismiss Report as False Positive
+      </button>
+</div>
+</div>
+<!-- Resolution Audit Trail -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">history</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Resolution Audit Log</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live Feed</span>
+</div>
+<div class="relative pl-4 space-y-4 before:content-[''] before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
+<!-- Log Entry 1 -->
+<div class="relative flex items-start gap-3">
+<div class="w-3.5 h-3.5 rounded-full bg-error ring-4 ring-surface-container-lowest -ml-[19px] mt-1 shrink-0"></div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Account automatically frozen via risk trigger</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">System Security Bot • Today, 14:22</p>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="relative flex items-start gap-3">
+<div class="w-3.5 h-3.5 rounded-full bg-primary ring-4 ring-surface-container-lowest -ml-[19px] mt-1 shrink-0"></div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Candidate report #REP-4091 filed by E. Rostova</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ingested via mobile app • Today, 13:58</p>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="relative flex items-start gap-3">
+<div class="w-3.5 h-3.5 rounded-full bg-outline ring-4 ring-surface-container-lowest -ml-[19px] mt-1 shrink-0"></div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Account registered and domain verified</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Self-service recruiter sign-up • 3 days ago, 09:15</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function confirmBlacklist() {
+    const scopeEmail = document.getElementById('scope-email')?.checked;
+    const scopeIp = document.getElementById('scope-ip')?.checked;
+    const scopes = [];
+    if (scopeEmail) scopes.push('Email Domain (*@cryptix-ventures.io)');
+    if (scopeIp) scopes.push('Corporate IP Cluster');
+    
+    const msg = 'Permanently blacklisting Cryptix Venture Group.\\nApplied Scopes: ' + (scopes.join(', ') || 'None') + '\\n\\nPosting has been permanently removed.';
+    alert(msg);
+  }
+
+  function issueWarning() {
+    alert('Formal warning issued to Cryptix Venture Group compliance contact. Account status set to Supervised Probation.');
+  }
+
+  function dismissReport() {
+    if (confirm('Are you sure you want to dismiss this incident flag as a false positive?')) {
+      alert('Report #REP-4091 dismissed. Employer restrictions lifted.');
+    }
+  }
+</script></main></body></html>

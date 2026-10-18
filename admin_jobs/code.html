@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="admin_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}body{min-height:max(884px,100dvh);}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary-container":"#2170e4","on-primary-container":"#a8b8ff","tertiary-fixed":"#d4e3ff","surface-container-low":"#f2f3ff","on-error":"#ffffff","on-surface":"#131b2e","primary-fixed-dim":"#b8c4ff","inverse-primary":"#b8c4ff","error":"#ba1a1a","on-primary-fixed-variant":"#173bab","surface-container":"#eaedff","surface":"#faf8ff","inverse-surface":"#283044","on-surface-variant":"#444653","on-secondary-fixed-variant":"#004395","on-secondary-fixed":"#001a42","on-tertiary":"#ffffff","outline":"#757684","error-container":"#ffdad6","on-error-container":"#93000a","on-tertiary-fixed":"#001c39","primary-container":"#1e40af","primary-fixed":"#dde1ff","secondary":"#0058be","on-tertiary-container":"#8fbeff","on-secondary-container":"#fefcff","on-tertiary-fixed-variant":"#004883","surface-container-lowest":"#ffffff","secondary-fixed-dim":"#adc6ff","surface-dim":"#d2d9f4","tertiary-container":"#004c8b","background":"#faf8ff","on-primary-fixed":"#001453","on-background":"#131b2e","surface-bright":"#faf8ff","on-primary":"#ffffff","surface-container-high":"#e2e7ff","inverse-on-surface":"#eef0ff","surface-variant":"#dae2fd","surface-container-highest":"#dae2fd","tertiary":"#003564","on-secondary":"#ffffff","surface-tint":"#3755c3","secondary-fixed":"#d8e2ff","primary":"#00288e","tertiary-fixed-dim":"#a4c9ff","outline-variant":"#c4c5d5"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"gutter-sm":"0.75rem","space-lg":"1rem","space-xl":"1.5rem","gutter":"1rem","space-md":"0.75rem","margin-mobile":"1rem","space-xs":"0.25rem","margin":"1.25rem","space-sm":"0.5rem"},fontFamily:{"headline-sm":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"]},fontSize:{"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"800"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"display-hero-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.025em","fontWeight":"800"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-[0_2px_8px_rgba(30,64,175,0.2)]"><span class="material-symbols-outlined text-[22px]">shield_person</span></div><div class="flex flex-col min-w-0"><div class="flex items-center gap-1"><span class="font-headline-sm text-headline-sm text-on-surface truncate tracking-tight">Admin Console</span><span class="material-symbols-outlined text-primary text-[18px] shrink-0">verified</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate uppercase tracking-wider">Platform Operations</span></div></div><div class="flex items-center gap-space-xs shrink-0"><a aria-label="Notifications" class="w-11 h-11 flex items-center justify-center relative rounded-full hover:bg-surface-container transition-colors" data-path="admin-notifications" href="#"><span class="material-symbols-outlined text-on-surface-variant text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></a><a aria-label="Admin Profile Settings" class="w-11 h-11 flex items-center justify-center" data-path="admin-profile" href="#"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-2 ring-primary-fixed-dim shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">manage_accounts</span></div></a></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-32 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Active Bottom Nav State Sync -->
+<script>
+    (function() {
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === 'admin-jobs') {
+          link.classList.remove('text-[#94A3B8]');
+          link.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-[0_0_16px_rgba(255,255,255,0.4)]');
+        } else {
+          link.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-[0_0_16px_rgba(255,255,255,0.4)]');
+          link.classList.add('text-[#94A3B8]');
+        }
+      });
+    })();
+  </script>
+<!-- Page Header & Search Section -->
+<section class="px-margin-mobile pt-space-md pb-space-sm">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Live Auditing Hub</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant px-2.5 py-0.5 rounded-full">SLA Pace: 98.4%</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-1">Job Moderation Queue</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">Compliance, policy enforcement &amp; quality audit</p>
+<!-- Search Bar with trailing filter button -->
+<div class="relative flex items-center w-full">
+<div class="absolute left-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full h-[50px] pl-11 pr-14 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline shadow-[0_4px_20px_-2px_rgba(15,23,42,0.05)] focus:outline-none focus:ring-0" placeholder="Search listings by title, company, or keyword..." type="text"/>
+<button aria-label="Filter listings" class="absolute right-2 w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[19px]">tune</span>
+</button>
+</div>
+</section>
+<!-- Horizontal Scrollable Status Pills -->
+<section class="w-full overflow-x-auto no-scrollbar py-space-sm pl-margin-mobile pr-margin-mobile">
+<div class="flex items-center gap-space-xs min-w-max">
+<!-- Active Pill -->
+<button class="flex items-center gap-1.5 px-3.5 h-[34px] rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+<span>Pending Review (9)</span>
+</button>
+<button class="flex items-center gap-1 px-3.5 h-[34px] rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md shadow-sm hover:bg-surface-container transition-colors">
+<span>Active (18.9k)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 h-[34px] rounded-full bg-surface-container-lowest text-error font-label-md text-label-md shadow-sm hover:bg-error-container transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>Flagged / Reported (3)</span>
+</button>
+<button class="flex items-center gap-1 px-3.5 h-[34px] rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md shadow-sm hover:bg-surface-container transition-colors">
+<span>Paused (42)</span>
+</button>
+<button class="flex items-center gap-1 px-3.5 h-[34px] rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md shadow-sm hover:bg-surface-container transition-colors">
+<span>Rejected (18)</span>
+</button>
+</div>
+</section>
+<!-- Moderation Compliance Alert Banner -->
+<section class="px-margin-mobile pt-space-xs pb-space-sm">
+<div class="bg-[#FFFBEB] text-[#92400E] p-space-md rounded-xl shadow-sm flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-[#FEF3C7] text-[#B45309] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">crisis_alert</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold tracking-tight text-[#78350F]">Automated Compliance Alert</span>
+<span class="font-label-sm text-label-sm uppercase bg-[#FEF3C7] text-[#92400E] px-1.5 py-0.5 rounded">High Priority</span>
+</div>
+<p class="font-body-sm text-body-sm text-[#92400E] mt-1 leading-snug">
+          9 new job postings contain unverified compensation disclosures or third-party links. Mandatory manual review before live aggregation.
+        </p>
+</div>
+</div>
+</section>
+<!-- Listings Queue Stack -->
+<section class="px-margin-mobile flex flex-col gap-space-lg pt-space-xs pb-space-lg">
+<!-- CARD 1: PENDING REVIEW -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-[0_4px_20px_-2px_rgba(15,23,42,0.05)] transition-all">
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-11 h-11 rounded-xl bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Futuristic geometric logo of an artificial intelligence startup in royal blue and white on a minimal clean light backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBriUm2jEvjYhQeciW13OuJkvtrzC0w44VyaHy5K3qhGjyHBi5ky4tOGlYI8fnXb-pwRST_hHaH1_QSj6GfOyicVX7nxt2dncj8pAA3fbm4wNDFJ12Jk5ltEayJJOZx_nV8DIqgkLYh4ktBhiRQcVkNGXw4OYI8oUWdhI6ABfHVowraKOVdltUDkoeRTMEf-dMuhrtqpqnxE_wcAu5Cv02vpEYtaq1npReEBLsqEV98j85DRBehIbc"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate">Quantum AI Systems</span>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Posted 45m ago</span>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] shrink-0 font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span> Pending Review
+        </span>
+</div>
+<!-- Card Title & Metadata -->
+<div class="mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight mb-1">Principal Machine Learning Architect</h3>
+<p class="font-label-md text-label-md text-primary font-medium">$240k–$310k • Remote (US/EU) • Full-Time</p>
+</div>
+<!-- Excerpt -->
+<div class="bg-surface-container-low p-space-sm rounded-xl mb-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+          “We are seeking an experienced ML architect to build autonomous multimodal infrastructure for next-generation enterprise orchestration models...”
+        </p>
+</div>
+<!-- Policy Heuristics Check -->
+<div class="mb-space-md">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider block mb-1.5">Automated Policy Checks</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#ECFDF5] text-[#065F46] font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-[#059669]">verified</span>
+            Compensation Verified
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#ECFDF5] text-[#065F46] font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-[#059669]">domain_verification</span>
+            Domain Matched
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FFFBEB] text-[#92400E] font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px] text-[#D97706]">warning</span>
+            External Redirect Link
+          </span>
+</div>
+</div>
+<!-- Action Row -->
+<div class="pt-space-xs flex flex-col gap-2">
+<button class="w-full h-11 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Approve Listing</span>
+</button>
+<div class="grid grid-cols-2 gap-2">
+<button class="h-10 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[17px]">visibility</span>
+<span>Quick Preview</span>
+</button>
+<button class="h-10 rounded-xl bg-error-container text-on-error-container font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[17px]">rule_folder</span>
+<span>Request Changes</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 2: REPORTED LISTING -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-[0_4px_20px_-2px_rgba(15,23,42,0.05)] transition-all">
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-11 h-11 rounded-xl bg-[#FEE2E2] text-error flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate">Cryptix Venture Group</span>
+<div class="flex items-center gap-1.5 text-error font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+<span>Reported by 2 candidates</span>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-error text-on-error shrink-0 font-semibold">
+          Suspended
+        </span>
+</div>
+<!-- Card Title -->
+<div class="mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight mb-1">High Yield Crypto Research Associate</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">$110k–$160k • Fully Remote • Contract</p>
+</div>
+<!-- Violation Reason Banner -->
+<div class="bg-error-container/60 p-space-sm rounded-xl mb-space-md flex items-start gap-2">
+<span class="material-symbols-outlined text-on-error-container text-[18px] shrink-0 mt-0.5">report_problem</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-error-container block font-bold">Suspected Fraud / Fee Solicitation</span>
+<p class="font-body-sm text-body-sm text-on-error-container mt-0.5">
+            Candidate reported upfront crypto deposit requested for onboarding software access credentials during initial screening.
+          </p>
+</div>
+</div>
+<!-- Action Row -->
+<div class="flex flex-col gap-2">
+<button class="w-full h-11 rounded-xl bg-error text-on-error font-label-lg text-label-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-sm">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Permanently Remove &amp; Blacklist Domain</span>
+</button>
+<button class="w-full h-10 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[17px]">assignment_late</span>
+<span>View 2 Reports &amp; Evidence</span>
+</button>
+</div>
+</div>
+<!-- CARD 3: ACTIVE AUDITED -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-[0_4px_20px_-2px_rgba(15,23,42,0.05)] transition-all">
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-11 h-11 rounded-xl bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Monochrome minimalist modern corporate tech brand mark on crisp white surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUvO3MktpZii3BBxY71iKK00FC2iAWmYvwAwwwnhK66-EUE1GUgdf5iuekBRQbcz9HFqny-DPOPcrD_pXF_1xl-0T_2yB-n-qgP72Z8iWNt9uGf56TANlFWRHcdLsdzjcl4_zjOo-CiHVSTuFZX1xYpw3DWenewwmr83Y3d5HhrY-exylqVF88fSjobw_08mMsQl1OJ1_H13Sqt9rcJyx-VAwxDvcstfnX7SN3C4r2wEBDJ7zz1x4"/>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-lg text-label-lg text-on-surface truncate">Linear App Inc.</span>
+<span class="material-symbols-outlined text-[#059669] text-[16px]">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-[#059669] font-semibold">Verified Enterprise Partner</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] shrink-0 font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span> Approved &amp; Live
+        </span>
+</div>
+<!-- Card Title & Metadata -->
+<div class="mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight mb-1">Staff Product Designer</h3>
+<p class="font-label-md text-label-md text-on-surface-variant font-medium">$170k–$210k • Remote-First • Active • 42 Applications</p>
+</div>
+<!-- Policy Metrics Row -->
+<div class="grid grid-cols-2 gap-2 mb-space-md">
+<div class="bg-surface-container-low p-2 rounded-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">format_image_left</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Salary Mandate</span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">NYC/CA Compliant</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-2 rounded-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">history_toggle_off</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Last Audited</span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">Today at 10:14 AM</span>
+</div>
+</div>
+</div>
+<!-- Action Row -->
+<div class="grid grid-cols-2 gap-2">
+<button class="h-10 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[17px]">history</span>
+<span>Audit History</span>
+</button>
+<button class="h-10 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[17px]">pause_circle</span>
+<span>Pause Listing</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Guidelines & SLA Micro-Note -->
+<section class="px-margin-mobile pb-space-xl">
+<div class="bg-surface-container-low p-space-md rounded-2xl flex items-start gap-space-sm shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Moderation Protocol Reminder</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-relaxed">
+          Standard SLA: Review pending listings within 4 hours. Follow Fair Labor Standards guidelines, verify compensation transparency laws, and flag unverified external recruitment domains immediately.
+        </p>
+</div>
+</div>
+</section>
+</div></main><div class="fixed bottom-5 inset-x-0 z-50 pb-safe flex justify-center pointer-events-none px-margin-mobile"><nav class="pointer-events-auto h-16 w-full max-w-[390px] bg-[#090D16] rounded-full p-1.5 flex items-center justify-between shadow-[0_12px_36px_0_rgba(15,23,42,0.25)]" data-active-classes="bg-surface-container-lowest text-on-surface shadow-[0_0_16px_rgba(255,255,255,0.4)]"><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-[#94A3B8] transition-all duration-200" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-sm text-[10px] leading-tight font-semibold">Dashboard</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-[#94A3B8] transition-all duration-200" data-path="admin-users" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-sm text-[10px] leading-tight font-semibold">Users</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-[#94A3B8] transition-all duration-200" data-path="admin-jobs" href="#"><span class="material-symbols-outlined text-[20px]">work</span><span class="font-label-sm text-[10px] leading-tight font-semibold">Jobs</span></a><a class="flex-1 h-full rounded-full flex flex-col items-center justify-center gap-0.5 text-[#94A3B8] transition-all duration-200" data-path="admin-more" href="#"><span class="material-symbols-outlined text-[20px]">more_horiz</span><span class="font-label-sm text-[10px] leading-tight font-semibold">More</span></a></nav></div></body></html>
