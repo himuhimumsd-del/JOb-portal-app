@@ -1,0 +1,219 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isUser(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        ('admin' in request.auth.token && request.auth.token.admin == true) ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('isAdmin', false) == true)
+      );
+    }
+
+    function isCompanyMember(companyId) {
+      return isAuthenticated() && exists(/databases/$(database)/documents/companies/$(companyId)/members/$(request.auth.uid));
+    }
+
+    // Taxonomy Categories: Public discovery, Admin curation
+    match /taxonomy_categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Companies: Registered employer profiles
+    match /companies/{companyId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() &&
+        request.resource.data.createdBy == request.auth.uid &&
+        request.resource.data.get('isVerified', false) == false;
+      allow update: if isAuthenticated() &&
+        (isCompanyMember(companyId) || isAdmin()) &&
+        request.resource.data.createdBy == resource.data.createdBy &&
+        (request.resource.data.get('isVerified', false) == resource.data.get('isVerified', false) || isAdmin());
+      allow delete: if isAdmin();
+
+      // Company Members subcollection: RBAC access control
+      match /members/{memberUserId} {
+        allow read: if isAuthenticated() && (request.auth.uid == memberUserId || isCompanyMember(companyId) || isAdmin());
+        allow create, update, delete: if isAuthenticated() &&
+          (get(/databases/$(database)/documents/companies/$(companyId)).data.createdBy == request.auth.uid || isAdmin());
+      }
+    }
+
+    // Jobs: Active listings are discoverable; draft/closed restricted to company members
+    match /jobs/{jobId} {
+      allow read: if (resource.data.status == "ACTIVE") ||
+        (isAuthenticated() && (isCompanyMember(resource.data.companyId) || isAdmin()));
+
+      allow create: if isAuthenticated() &&
+        (isCompanyMember(request.resource.data.companyId) || isAdmin()) &&
+        request.resource.data.creatorId == request.auth.uid &&
+        request.resource.data.get('applicantsCount', 0) == 0 &&
+        (request.resource.data.get('isVerified', false) == false || isAdmin()) &&
+        request.resource.data.title is string &&
+        request.resource.data.companyId is string;
+
+      allow update: if isAuthenticated() &&
+        (isCompanyMember(resource.data.companyId) || isAdmin()) &&
+        request.resource.data.id == resource.data.id &&
+        request.resource.data.companyId == resource.data.companyId &&
+        request.resource.data.creatorId == resource.data.creatorId &&
+        request.resource.data.get('applicantsCount', 0) == resource.data.get('applicantsCount', 0) &&
+        (request.resource.data.get('isVerified', false) == resource.data.get('isVerified', false) || isAdmin());
+
+      allow delete: if isAuthenticated() &&
+        (get(/databases/$(database)/documents/companies/$(resource.data.companyId)).data.createdBy == request.auth.uid || isAdmin());
+    }
+
+    // User Profiles: Private personal data & anti-escalation
+    match /users/{userId} {
+      allow read: if isUser(userId) || isAdmin();
+      allow create: if isUser(userId) &&
+        request.resource.data.get('isAdmin', false) == false &&
+        request.resource.data.get('isVerified', false) == false &&
+        request.resource.data.get('isPremium', false) == false &&
+        request.resource.data.get('availableReferralBalance', 0) == 0 &&
+        request.resource.data.get('reservedWithdrawalBalance', 0) == 0 &&
+        request.resource.data.get('totalEarnedRewards', 0) == 0 &&
+        request.resource.data.get('successfulReferralsCount', 0) == 0;
+
+      allow update: if isUser(userId) &&
+        (request.resource.data.get('isAdmin', false) == resource.data.get('isAdmin', false) || isAdmin()) &&
+        (request.resource.data.get('isVerified', false) == resource.data.get('isVerified', false) || isAdmin()) &&
+        (request.resource.data.get('isPremium', false) == resource.data.get('isPremium', false) || isAdmin()) &&
+        (request.resource.data.get('availableReferralBalance', 0) == resource.data.get('availableReferralBalance', 0) || isAdmin()) &&
+        (request.resource.data.get('reservedWithdrawalBalance', 0) == resource.data.get('reservedWithdrawalBalance', 0) || isAdmin()) &&
+        (request.resource.data.get('totalEarnedRewards', 0) == resource.data.get('totalEarnedRewards', 0) || isAdmin()) &&
+        (request.resource.data.get('successfulReferralsCount', 0) == resource.data.get('successfulReferralsCount', 0) || isAdmin()) &&
+        (resource.data.get('referredByCode', null) == null || request.resource.data.get('referredByCode', null) == resource.data.get('referredByCode', null));
+      allow delete: if isAdmin();
+
+      // User search alerts
+      match /alerts/{alertId} {
+        allow read, write: if isUser(userId);
+      }
+    }
+
+    // Applications: Restricted to candidate, company hiring team, and admin
+    match /applications/{applicationId} {
+      allow read: if isAuthenticated() &&
+        (resource.data.candidateId == request.auth.uid || isCompanyMember(resource.data.companyId) || isAdmin());
+
+      allow create: if isAuthenticated() &&
+        request.resource.data.candidateId == request.auth.uid &&
+        applicationId == request.resource.data.jobId + '_' + request.auth.uid &&
+        request.resource.data.get('status', 'APPLIED') in ['APPLIED', 'SUBMITTED', 'IN_REVIEW'] &&
+        request.resource.data.get('atsScore', 0) == 0 &&
+        request.resource.data.get('interviewDate', null) == null &&
+        request.resource.data.get('interviewMeetingUrl', null) == null &&
+        exists(/databases/$(database)/documents/jobs/$(request.resource.data.jobId)) &&
+        get(/databases/$(database)/documents/jobs/$(request.resource.data.jobId)).data.status == 'ACTIVE' &&
+        request.resource.data.companyId == get(/databases/$(database)/documents/jobs/$(request.resource.data.jobId)).data.companyId;
+
+      allow update: if isAuthenticated() && (
+        (isCompanyMember(resource.data.companyId) &&
+          request.resource.data.candidateId == resource.data.candidateId &&
+          request.resource.data.jobId == resource.data.jobId &&
+          request.resource.data.companyId == resource.data.companyId) ||
+        (isUser(resource.data.candidateId) &&
+          request.resource.data.candidateId == resource.data.candidateId &&
+          request.resource.data.jobId == resource.data.jobId &&
+          request.resource.data.companyId == resource.data.companyId &&
+          request.resource.data.status == resource.data.status &&
+          request.resource.data.get('atsScore', 0) == resource.data.get('atsScore', 0) &&
+          request.resource.data.get('interviewDate', null) == resource.data.get('interviewDate', null) &&
+          request.resource.data.get('interviewMeetingUrl', null) == resource.data.get('interviewMeetingUrl', null)) ||
+        isAdmin()
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // Interviews: Protect meeting URLs, candidate records, and private scorecards
+    match /interviews/{interviewId} {
+      allow read: if isAuthenticated() &&
+        (resource.data.candidateId == request.auth.uid || isCompanyMember(resource.data.companyId) || isAdmin());
+
+      allow create: if isAuthenticated() &&
+        (isCompanyMember(request.resource.data.companyId) || isAdmin()) &&
+        request.resource.data.candidateId != null &&
+        request.resource.data.companyId != null &&
+        request.resource.data.meetingUrl != null;
+
+      allow update: if isAuthenticated() &&
+        (isCompanyMember(resource.data.companyId) || isAdmin()) &&
+        request.resource.data.candidateId == resource.data.candidateId &&
+        request.resource.data.companyId == resource.data.companyId &&
+        request.resource.data.get('jobId', '') == resource.data.get('jobId', '') &&
+        request.resource.data.get('applicationId', '') == resource.data.get('applicationId', '');
+
+      allow delete: if isAdmin();
+
+      // Scorecards subcollection: internal evaluation notes strictly private to company members
+      match /scorecards/{scorecardId} {
+        allow read, write: if isAuthenticated() &&
+          (isCompanyMember(get(/databases/$(database)/documents/interviews/$(interviewId)).data.companyId) || isAdmin());
+      }
+    }
+
+    // Moderation Reports: Created by user; audited by admin
+    match /reports/{reportId} {
+      allow create: if isAuthenticated() &&
+        request.resource.data.reportedByUid == request.auth.uid;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Referrals: Private to participants; prevent self-referral; status updates server/admin only
+    match /referrals/{referralId} {
+      allow read: if isAuthenticated() &&
+        (resource.data.referrerUid == request.auth.uid || resource.data.referredUid == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() &&
+        request.resource.data.referredUid == request.auth.uid &&
+        request.resource.data.referrerUid != request.auth.uid &&
+        request.resource.data.status == 'REGISTERED' &&
+        request.resource.data.get('rewardAmount', 0) == 0;
+      allow update, delete: if isAdmin();
+    }
+
+    // Referral Ledger: Immutable transaction records
+    match /referral_ledger/{ledgerId} {
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Withdrawal Requests: Submitted by user; approved/processed by admin
+    match /withdrawal_requests/{requestId} {
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.status == 'REQUESTED';
+      allow update, delete: if isAdmin();
+    }
+
+    // Premium Payments: Initiated by user; verified by admin / backend gateway
+    match /premium_payments/{paymentId} {
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.status in ['INITIATED', 'PENDING_VERIFICATION'];
+      allow update, delete: if isAdmin();
+    }
+
+    // Catch-all deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

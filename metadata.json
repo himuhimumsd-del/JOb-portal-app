@@ -1,0 +1,6 @@
+{
+  "name": "भर्ती-App",
+  "description": "Executive mobile talent ecosystem connecting job seekers, employers, and platform administrators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

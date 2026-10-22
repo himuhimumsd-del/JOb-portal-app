@@ -1,47 +1,41 @@
-# Premium Mobile Job Portal UI Design System
+# TalentNexus — Executive Mobile Talent Ecosystem
 
-A comprehensive, executive-tier mobile UI design system for a next-generation Job Portal platform. Designed for high fidelity, modern aesthetics, and seamless user experiences across all major platform roles.
+A modern, high-fidelity Android application built with Kotlin and Jetpack Compose. TalentNexus seamlessly connects ambitious professionals, high-growth employers, and platform administrators within an executive-tier mobile interface.
 
 ---
 
-## 📱 Modules & Screens Overview
-
-The project is structured into 3 core ecosystems: **Job Seeker**, **Employer**, and **Admin**.
+## 📱 Three Core Platform Ecosystems
 
 ### 1. Job Seeker Experience
-- **`job_seeker_home/`**: Main discovery feed, featured openings, and quick-action filters.
-- **`job_seeker_explore_jobs/`**: Advanced job exploration and search experience.
-- **`job_seeker_job_details/`**: In-depth role description, company insights, and 1-tap apply flow.
-- **`job_seeker_my_applications/`**: Real-time application status tracker and interview schedules.
-- **`job_seeker_saved_jobs/`**: Bookmarked positions and quick comparisons.
-- **`job_seeker_job_alerts/`**: Custom alerts and notifications for targeted job matches.
-- **`job_seeker_profile/`**: Candidate profile, work history, and credential showcase.
-- **`job_seeker_resume_management/`**: Resume upload, CV versions, and ATS compatibility view.
-- **`candidate_interview_details/`**: Candidate interview schedule, meeting links, and prep notes.
+- **Home Feed**: Curated executive roles, real-time search with filter triggers, profile completion tracker, industry category discovery, and featured openings.
+- **Explore & Filter**: Full-text keyword search with multi-dimensional filtering by workplace type (Remote, Hybrid, On-site) and industry category (Tech & Dev, Product & UX, Data & AI, Sales & Growth).
+- **Job Details & 1-Tap Apply**: Detailed role missions, responsibilities, requirements, and benefits with tailored resume version selection and ATS compatibility scoring.
+- **Applications Pipeline Tracker**: Real-time status tracker (Applied, In Review, Shortlisted, Interview Scheduled, Offer) with interview session briefings and Google Meet integration.
+- **Saved Bookmarks**: Quick access to saved roles for comparison and instant application.
+- **Profile & Resume Management**: Candidate competencies, resume versions, ATS scoring, and automated job alert triggers.
 
 ### 2. Employer & Recruiter Suite
-- **`employer_dashboard/`**: Overview of active listings, candidate pipeline, and hiring KPIs.
-- **`employer_manage_jobs/`**: Comprehensive job listing management.
-- **`employer_create_job/` & `employer_create_job_5_step_wizard/`**: Multi-step job publishing wizard.
-- **`employer_job_preview/` & `employer_publish_confirmation/`**: Live job post preview and confirmation.
-- **`employer_applicants/` & `employer_applicant_details/`**: Candidate vetting, ATS score, and resume review.
-- **`employer_interviews/` & `employer_schedule_interview/`**: Interview scheduling and calendar coordination.
-- **`employer_interview_details/`**: Interview notes, scorecard, and feedback form.
-- **`employer_company_profile/` & `employer_settings/`**: Organization branding, perks, and team preferences.
+- **Talent Hub Dashboard**: Real-time sourcing KPIs (Active Openings, Total Applicants, Shortlisted, Upcoming Interviews) and multi-stage candidate velocity pipeline funnel.
+- **Job Listings Management**: Comprehensive job post lifecycle (Active, Under Review, Draft, Closed) with applicant counters and status toggles.
+- **5-Step Post Job Wizard**: Step-by-step role creation (Basics, Skills, Compensation & Perks, ATS Screening, Live Candidate Preview & Instant Publish).
+- **Applicant Vetting**: AI-ranked candidate pipeline with ATS match scores, key skills review, stage advancement, and interview scheduling.
+- **Interviews & Scorecards**: Calendar coordination, Google Meet links, and multi-criteria candidate evaluation scorecards (1-5 stars & hiring notes).
+- **Company Branding & Settings**: Verified employer profile, benefits showcase, and recruiter settings.
 
 ### 3. Administrator Portal
-- **`admin_dashboard/`**: Platform health, active metrics, transactions, and audit logs.
-- **`admin_users/`**: User account management, moderation, and role-based permissions.
-- **`admin_jobs/`**: Global job listings oversight and moderation.
-- **`admin_categories_skills/`**: Taxonomy, industry categories, and skill dictionary manager.
-- **`admin_employer_verification_detail/`**: KYB compliance and business verification workflow.
-- **`admin_reported_content_detail/`**: Content moderation, dispute handling, and policy enforcement.
-- **`admin_more/`**: Additional administrative utilities and configuration tools.
-- **`executive_mobile_talent_ecosystem/`**: Strategic ecosystem blueprint and architecture.
+- **Operations Dashboard**: Platform health telemetrics (99.98% uptime, 124k+ seekers, 4,820 verified orgs), live audit feed, and system governance.
+- **Listings Moderation**: Global compliance review queue with Approve or Flag/Suspend actions.
+- **User Governance**: Directory of job seekers and verified enterprise entities with KYB standing and status management.
+- **Taxonomy & Skills Dictionary**: Standardized industry fields and core competency taxonomy manager.
+- **Disputes & KYB Audits**: Policy enforcement on flagged listings, compensation disclosures, and company registrations.
 
 ---
 
-## 🛠️ Tech & Assets
-- **Format**: Clean semantic HTML5 & modern CSS3 layouts.
-- **Visuals**: High-resolution screen previews included in each directory (`screen.png`).
-- **Responsive**: Tailored for contemporary mobile form factors and modern viewports.
+## 🛠️ Technology Stack & Architecture
+
+- **Language**: 100% Kotlin
+- **UI Framework**: Jetpack Compose (Material Design 3)
+- **Architecture**: MVVM with reactive Kotlin StateFlow and Repository Pattern
+- **Typography**: Plus Jakarta Sans (Google Fonts bundled locally in `res/font/`)
+- **Build System**: Gradle 9.3.1 with Kotlin DSL and Version Catalog (`libs.versions.toml`)
+- **Platform**: Android SDK 36 (Minimum SDK 26) with Edge-to-Edge window insets support

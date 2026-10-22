@@ -1,0 +1,225 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with private contact details, roles, and administrative flags",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" },
+        "bio": { "type": "string" },
+        "title": { "type": "string" },
+        "completionPercent": { "type": "integer" },
+        "skills": { "type": "array" },
+        "role": { "type": "string" },
+        "isAdmin": { "type": "boolean" },
+        "isVerified": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "fullName", "email", "role"]
+    },
+    "Company": {
+      "title": "Company",
+      "description": "Registered company entity for employer recruitment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "tagline": { "type": "string" },
+        "industry": { "type": "string" },
+        "website": { "type": "string" },
+        "location": { "type": "string" },
+        "isVerified": { "type": "boolean" },
+        "employeeCount": { "type": "string" },
+        "openRolesCount": { "type": "integer" },
+        "bio": { "type": "string" },
+        "perks": { "type": "array" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "createdBy"]
+    },
+    "CompanyMember": {
+      "title": "CompanyMember",
+      "description": "Team membership record granting recruitment access to a company",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "companyId": { "type": "string" },
+        "userId": { "type": "string" },
+        "role": { "type": "string" },
+        "joinedAt": { "type": "string" }
+      },
+      "required": ["companyId", "userId", "role"]
+    },
+    "Job": {
+      "title": "Job",
+      "description": "Job listing with status, compensation, category, and company ownership",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "company": { "type": "string" },
+        "companyId": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "location": { "type": "string" },
+        "workplaceType": { "type": "string" },
+        "employmentType": { "type": "string" },
+        "salaryRange": { "type": "string" },
+        "minSalary": { "type": "integer" },
+        "maxSalary": { "type": "integer" },
+        "category": { "type": "string" },
+        "tags": { "type": "array" },
+        "description": { "type": "string" },
+        "responsibilities": { "type": "array" },
+        "requirements": { "type": "array" },
+        "benefits": { "type": "array" },
+        "isVerified": { "type": "boolean" },
+        "isActivelyHiring": { "type": "boolean" },
+        "postedTime": { "type": "string" },
+        "status": { "type": "string" },
+        "applicantsCount": { "type": "integer" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "company", "companyId", "creatorId", "status", "category"]
+    },
+    "Application": {
+      "title": "Application",
+      "description": "Candidate job application with stage tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "jobId": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "company": { "type": "string" },
+        "companyId": { "type": "string" },
+        "candidateId": { "type": "string" },
+        "candidateName": { "type": "string" },
+        "candidateEmail": { "type": "string" },
+        "appliedDate": { "type": "string" },
+        "status": { "type": "string" },
+        "resumeVersion": { "type": "string" },
+        "interviewDate": { "type": "string" },
+        "interviewTime": { "type": "string" },
+        "interviewMeetingUrl": { "type": "string" },
+        "prepNotes": { "type": "string" }
+      },
+      "required": ["id", "jobId", "companyId", "candidateId", "status"]
+    },
+    "Interview": {
+      "title": "Interview",
+      "description": "Scheduled interview session with candidate and meeting credentials",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "applicationId": { "type": "string" },
+        "jobId": { "type": "string" },
+        "companyId": { "type": "string" },
+        "candidateId": { "type": "string" },
+        "candidateName": { "type": "string" },
+        "candidateRole": { "type": "string" },
+        "company": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "duration": { "type": "string" },
+        "interviewerName": { "type": "string" },
+        "platform": { "type": "string" },
+        "meetingUrl": { "type": "string" },
+        "status": { "type": "string" },
+        "scoreTechnical": { "type": "integer" },
+        "scoreCulture": { "type": "integer" },
+        "feedbackNotes": { "type": "string" }
+      },
+      "required": ["id", "candidateId", "companyId", "date", "time", "meetingUrl"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Taxonomy category for classifying job listings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "jobCount": { "type": "string" },
+        "icon": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "icon"]
+    },
+    "JobAlert": {
+      "title": "JobAlert",
+      "description": "Saved candidate alert preferences for new job postings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "keyword": { "type": "string" },
+        "category": { "type": "string" },
+        "minSalary": { "type": "string" },
+        "frequency": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "keyword", "category"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "Platform audit report submitted by users for moderation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "reportedByUid": { "type": "string" },
+        "reportedBy": { "type": "string" },
+        "reason": { "type": "string" },
+        "targetId": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "type", "title", "reportedByUid", "reason", "status"]
+    }
+  },
+  "firestore": {
+    "/taxonomy_categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Taxonomy categories for job classification"
+    },
+    "/companies/{companyId}": {
+      "schema": { "$ref": "#/entities/Company" },
+      "description": "Registered employer companies"
+    },
+    "/companies/{companyId}/members/{userId}": {
+      "schema": { "$ref": "#/entities/CompanyMember" },
+      "description": "Company team membership and roles"
+    },
+    "/jobs/{jobId}": {
+      "schema": { "$ref": "#/entities/Job" },
+      "description": "Job postings"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Private user and candidate profiles"
+    },
+    "/applications/{applicationId}": {
+      "schema": { "$ref": "#/entities/Application" },
+      "description": "Job applications submitted by candidates"
+    },
+    "/interviews/{interviewId}": {
+      "schema": { "$ref": "#/entities/Interview" },
+      "description": "Interviews scheduled with candidates"
+    },
+    "/users/{userId}/alerts/{alertId}": {
+      "schema": { "$ref": "#/entities/JobAlert" },
+      "description": "User specific job alert subscriptions"
+    },
+    "/reports/{reportId}": {
+      "schema": { "$ref": "#/entities/Report" },
+      "description": "Moderation reports submitted for admin review"
+    }
+  }
+}
