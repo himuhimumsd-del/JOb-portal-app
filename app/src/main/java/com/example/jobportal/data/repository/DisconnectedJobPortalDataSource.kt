@@ -223,6 +223,22 @@ class DisconnectedJobPortalDataSource(
         return false
     }
 
+    override suspend fun createCashfreePremiumOrder(): Result<CashfreeOrderSession> {
+        val err = "Cannot create Cashfree order: Live Firestore database '$databaseId' is disconnected."
+        _errorMessage.value = err
+        return Result.failure(IllegalStateException(err))
+    }
+
+    override suspend fun verifyCashfreePayment(orderId: String, providerRef: String?): PaymentVerificationResult {
+        val err = "Cannot verify Cashfree payment: Live Firestore database '$databaseId' is disconnected."
+        _errorMessage.value = err
+        return PaymentVerificationResult(
+            status = "FAILED",
+            orderId = orderId,
+            message = err
+        )
+    }
+
     override fun requestWithdrawal(amount: Int, payoutAccountDetails: String): Boolean {
         _errorMessage.value = "Cannot request withdrawal: Live Firestore database '$databaseId' is disconnected."
         return false

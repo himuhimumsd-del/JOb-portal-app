@@ -32,7 +32,8 @@ fun AuthDialog(
     authUiState: AuthUiState,
     onSignInWithGoogle: (Activity) -> Unit,
     onSignOut: () -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onEnableDemoMode: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     val activity = context as? Activity
@@ -176,9 +177,9 @@ fun AuthDialog(
                                 modifier = Modifier.size(20.dp)
                             )
                             Text(
-                                text = "Authenticated with Firebase Auth via Google Sign-In. Role authorization and data sync will be enforced in Stage 2.",
+                                text = "Signed in securely with Google. Your profile, applications, and referral rewards are synced.",
                                 style = MaterialTheme.typography.bodySmall.copy(
-                                    fontSize = 11.sp,
+                                    fontSize = 12.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             )
@@ -203,7 +204,7 @@ fun AuthDialog(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Sign Out of Session", fontWeight = FontWeight.SemiBold)
+                        Text("Sign Out", fontWeight = FontWeight.SemiBold)
                     }
 
                 } else {
@@ -248,24 +249,58 @@ fun AuthDialog(
                             color = MaterialTheme.colorScheme.errorContainer,
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Row(
-                                modifier = Modifier.padding(10.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            Column(
+                                modifier = Modifier.padding(12.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.ErrorOutline,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Text(
-                                    text = authUiState.message,
-                                    style = MaterialTheme.typography.bodySmall.copy(
-                                        color = MaterialTheme.colorScheme.onErrorContainer,
-                                        fontSize = 11.sp
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.ErrorOutline,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.error,
+                                        modifier = Modifier.size(18.dp)
                                     )
-                                )
+                                    Text(
+                                        text = authUiState.message,
+                                        style = MaterialTheme.typography.bodySmall.copy(
+                                            color = MaterialTheme.colorScheme.onErrorContainer,
+                                            fontSize = 11.sp
+                                        )
+                                    )
+                                }
+
+                                if (onEnableDemoMode != null) {
+                                    OutlinedButton(
+                                        onClick = onEnableDemoMode,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(38.dp),
+                                        shape = RoundedCornerShape(10.dp),
+                                        colors = ButtonDefaults.outlinedButtonColors(
+                                            contentColor = MaterialTheme.colorScheme.onErrorContainer
+                                        ),
+                                        border = androidx.compose.foundation.BorderStroke(
+                                            1.dp,
+                                            MaterialTheme.colorScheme.error.copy(alpha = 0.5f)
+                                        )
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.PlayArrow,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(
+                                            text = "Explore in Demo Mode (Emulator)",
+                                            style = MaterialTheme.typography.labelMedium.copy(
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+                                }
                             }
                         }
                     }

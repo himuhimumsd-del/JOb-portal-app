@@ -285,10 +285,27 @@ data class PremiumPaymentRecord(
     val amount: Int = 10, // ₹10 (rupees convenience)
     val currency: String = "INR",
     val status: PaymentStatus = PaymentStatus.INITIATED,
-    val provider: String = "MOCK_GATEWAY",
+    val provider: String = "CASHFREE",
     val providerTransactionRef: String? = null,
+    val paymentSessionId: String? = null,
     val verifiedAt: String? = null,
     val createdAt: String
+)
+
+data class CashfreeOrderSession(
+    val orderId: String,
+    val paymentSessionId: String,
+    val amount: Int = 10,
+    val currency: String = "INR",
+    val environment: String = "SANDBOX"
+)
+
+data class PaymentVerificationResult(
+    val status: String, // "SUCCESS", "PENDING", "FAILED"
+    val orderId: String,
+    val isPremium: Boolean = false,
+    val rewardCredited: Boolean = false,
+    val message: String? = null
 )
 
 data class ReferralProfile(

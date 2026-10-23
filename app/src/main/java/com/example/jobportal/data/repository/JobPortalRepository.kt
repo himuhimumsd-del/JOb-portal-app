@@ -169,14 +169,12 @@ class JobPortalRepository(
             }
             _connectionState.value = CloudConnectionState.Error(
                 databaseId = databaseId,
-                message = e.localizedMessage ?: "Failed to connect to named Firestore database '$databaseId'",
+                message = "Unable to connect to live cloud jobs. Please check your internet connection.",
                 cause = e
             )
-            // CRITICAL: NEVER silently fall back to mock data!
-            // Surface DisconnectedJobPortalDataSource with explicit error state.
             val errorDs = DisconnectedJobPortalDataSource(
                 databaseId = databaseId,
-                initialErrorMessage = "Live cloud database '$databaseId' error: ${e.localizedMessage ?: e.javaClass.simpleName}"
+                initialErrorMessage = "Live cloud connection is currently unavailable. Please check your internet connection and try again."
             )
             _dataSource.value.cleanup()
             switchToDataSource(errorDs)
@@ -343,6 +341,21 @@ class JobPortalRepository(
     fun processVerifiedPayment(paymentId: String, providerRef: String): Boolean {
         val result = _dataSource.value.processVerifiedPayment(paymentId, providerRef)
         premiumPayments.value = _dataSource.value.premiumPayments.value
+        referralProfile.value = _dataSource.value.referralProfile.value
+        referrals.value = _dataSource.value.referrals.value
+        ledgerEntries.value = _dataSource.value.ledgerEntries.value
+        errorMessage.value = _dataSource.value.errorMessage.value
+        return result
+    }
+
+    suspend fun createCashfreePremiumOrder(): Result<CashfreeOrderSession> {
+        val result = _dataSource.value.createCashfreePremiumOrder()
+        errorMessage.value = _dataSource.value.errorMessage.value
+        return result
+    }
+
+    suspend fun verifyCashfreePayment(orderId: String, providerRef: String? = null): PaymentVerificationResult {
+        val result = _dataSource.value.verifyCashfreePayment(orderId, providerRef)
         referralProfile.value = _dataSource.value.referralProfile.value
         referrals.value = _dataSource.value.referrals.value
         ledgerEntries.value = _dataSource.value.ledgerEntries.value

@@ -1,0 +1,462 @@
+1:51.105
+System
+Build
+ Render Start 
+15:01:51.834
+System
+Build
+ Render End 
+15:01:52.015
+Backend
+Log
+ Starting build...
+  > Task :app:preBuild UP-TO-DATE
+  > Task :app:preDebugBuild UP-TO-DATE
+  > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+  > Task :app:generateDebugBuildConfig UP-TO-DATE
+  > Task :app:generateDebugResources UP-TO-DATE
+  > Task :app:processDebugGoogleServices UP-TO-DATE
+  > Task :app:packageDebugResources UP-TO-DATE
+  > Task :app:processDebugNavigationResources UP-TO-DATE
+  > Task :app:parseDebugLocalResources UP-TO-DATE
+  > Task :app:generateDebugRFile UP-TO-DATE
+  > Task :app:compileDebugKotlin UP-TO-DATE
+  > Task :app:javaPreCompileDebug UP-TO-DATE
+  > Task :app:compileDebugJavaWithJavac UP-TO-DATE
+  > Task :app:generateDebugAssets UP-TO-DATE
+  > Task :app:mergeDebugAssets UP-TO-DATE
+  > Task :app:compressDebugAssets UP-TO-DATE
+  > Task :app:desugarDebugFileDependencies UP-TO-DATE
+  > Task :app:checkDebugAarMetadata UP-TO-DATE
+  > Task :app:mapDebugSourceSetPaths UP-TO-DATE
+  > Task :app:compileDebugNavigationResources UP-TO-DATE
+  > Task :app:mergeDebugResources UP-TO-DATE
+  > Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+  > Task :app:extractDeepLinksDebug UP-TO-DATE
+  > Task :app:processDebugMainManifest UP-TO-DATE
+  > Task :app:processDebugManifest UP-TO-DATE
+  > Task :app:processDebugManifestForPackage UP-TO-DATE
+  > Task :app:processDebugResources UP-TO-DATE
+  > Task :app:dexBuilderDebug UP-TO-DATE
+  > Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+  > Task :app:processDebugJavaRes UP-TO-DATE
+  > Task :app:mergeDebugJavaResource UP-TO-DATE
+  > Task :app:checkDebugDuplicateClasses UP-TO-DATE
+  > Task :app:mergeExtDexDebug UP-TO-DATE
+  > Task :app:mergeLibDexDebug UP-TO-DATE
+  > Task :app:mergeProjectDexDebug UP-TO-DATE
+  > Task :app:mergeDebugJniLibFolders UP-TO-DATE
+  > Task :app:mergeDebugNativeLibs UP-TO-DATE
+  > Task :app:stripDebugDebugSymbols UP-TO-DATE
+  > Task :app:validateSigningDebug UP-TO-DATE
+  > Task :app:writeDebugAppMetadata UP-TO-DATE
+  > Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+  > Task :app:packageDebug UP-TO-DATE
+  > Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+  > Task :app:assembleDebug UP-TO-DATE
+  
+  BUILD SUCCESSFUL in 1s
+  39 actionable tasks: 39 up-to-date
+  Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html 
+15:01:52.015
+Backend
+Log
+ Build successful. 
+15:01:54.740
+Backend
+Log
+ CONNECTED 
+15:02:14.031
+Android
+Debug
+ 10-22 09:32:08.187 7173 D/EGL_emulation: app_time_stats: avg=184126.08ms min=8.45ms max=1104686.50ms count=6 
+15:02:14.031
+Android
+Warning
+ 10-22 09:32:08.346 7173 W/WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest. 
+15:02:14.031
+Android
+Warning
+ 10-22 09:32:08.416 7173 W/WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest. 
+15:02:14.031
+Android
+Debug
+ 10-22 09:32:09.189 7173 D/EGL_emulation: app_time_stats: avg=32.58ms min=7.21ms max=97.91ms count=23 
+15:02:14.031
+Android
+Debug
+ 10-22 09:32:12.125 7173 D/EGL_emulation: app_time_stats: avg=387.23ms min=11.50ms max=3010.76ms count=9 
+15:02:14.031
+Android
+Warning
+ 10-22 09:32:12.449 7173 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@3ef1928 
+15:02:14.031
+Android
+Debug
+ 10-22 09:32:13.430 7173 D/EGL_emulation: app_time_stats: avg=4227.23ms min=4227.23ms max=4227.23ms count=1 
+15:02:14.031
+Android
+Warning
+ 10-22 09:32:13.561 7173 W/WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest. 
+15:02:14.031
+Android
+Log
+ 10-22 09:32:13.599 7173 I/obportal.tnxapp: Compiler allocated 6122KB to compile kotlin.Unit com.example.jobportal.ui.components.AuthDialogKt.AuthDialog$lambda$16$lambda$15(com.example.jobportal.data.repository.AuthUser, kotlin.jvm.functions.Function0, com.example.jobportal.data.repository.AuthUiState, android.app.Activity, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function0, androidx.compose.foundation.layout.ColumnScope, androidx.compose.runtime.Composer, int) 
+15:02:34.080
+Android
+Debug
+ 10-22 09:32:16.953 7173 D/EGL_emulation: app_time_stats: avg=82.19ms min=3.44ms max=2185.91ms count=34 
+15:02:34.080
+Android
+Debug
+ 10-22 09:32:17.961 7173 D/EGL_emulation: app_time_stats: avg=18.95ms min=1.57ms max=33.11ms count=27 
+15:02:34.080
+Android
+Debug
+ 10-22 09:32:18.973 7173 D/EGL_emulation: app_time_stats: avg=23.02ms min=3.82ms max=53.83ms count=24 
+15:02:34.080
+Android
+Debug
+ 10-22 09:32:19.756 7173 D/VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+visibilityChanged oldVisibility=true newVisibility=false 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:19.871 7173 W/obportal.tnxapp: Cleared Reference was only reachable from finalizer (only reported once) 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:19.908 7173 W/obportal.tnxapp: Reducing the number of considered missed Gc histogram windows from 111 to 100 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:24.749 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=End of stream or IOException, cause=null}. 
+15:02:34.080
+Android
+Debug
+ 10-22 09:32:24.749 7173 D/TrafficStats: tagSocket(115) with statsTag=0xffffffff, statsUid=-1 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:24.750 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:24.755 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:156)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+Caused by: android.system.GaiException: android_getaddrinfo failed: EAI_NODATA (No address associated with hostname)
+at libcore.io.Linux.android_getaddrinfo(Native Method)
+at libcore.io.ForwardingOs.android_getaddrinfo(ForwardingOs.java:133)
+at libcore.io.BlockGuardOs.android_getaddrinfo(BlockGuardOs.java:222)
+at libcore.io.ForwardingOs.android_getaddrinfo(ForwardingOs.java:133)
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:135)
+... 9 more
+}. 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:25.489 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:156)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+Caused by: android.system.GaiException: android_getaddrinfo failed: EAI_NODATA (No address associated with hostname)
+at libcore.io.Linux.android_getaddrinfo(Native Method)
+at libcore.io.ForwardingOs.android_getaddrinfo(ForwardingOs.java:133)
+at libcore.io.BlockGuardOs.android_getaddrinfo(BlockGuardOs.java:222)
+at libcore.io.ForwardingOs.android_getaddrinfo(ForwardingOs.java:133)
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:135)
+... 9 more
+}. 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:25.560 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:26.696 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:124)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+}. 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:27.079 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:02:34.080
+Android
+Warning
+ 10-22 09:32:29.757 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:05.000 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:04:14.127
+Android
+Debug
+ 10-22 09:34:05.004 7173 D/VRI[MainActivity]: visibilityChanged oldVisibility=false newVisibility=true 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:05.025 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:156)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+Caused by: android.system.GaiException: android_getaddrinfo failed: EAI_NODATA (No address associated with hostname)
+at libcore.io.Linux.android_getaddrinfo(Native Method)
+at libcore.io.ForwardingOs.android_getaddrinfo(ForwardingOs.java:133)
+at libcore.io.BlockGuardOs.android_getaddrinfo(BlockGuardOs.java:222)
+at libcore.io.ForwardingOs.android_getaddrinfo(ForwardingOs.java:133)
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:135)
+... 9 more
+}. 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:05.028 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:05.033 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:124)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+}. 
+15:04:14.127
+Android
+Log
+ 10-22 09:34:05.034 7173 I/EGL_emulation: Opening libGLESv1_CM_emulation.so
+Opening libGLESv2_emulation.so 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:05.045 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:124)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+}. 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:05.049 7173 W/HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+Failed to initialize 101010-2 format, error = EGL_SUCCESS 
+15:04:14.127
+Android
+Log
+ 10-22 09:34:05.776 7173 I/CredManProvService: GetCredentialResponse error returned from framework 
+15:04:14.127
+Android
+Log
+ 10-22 09:34:05.935 7173 I/HWUI    : Davey! duration=849ms; Flags=1, FrameTimelineVsyncId=53624, IntendedVsync=2264090221915, Vsync=2264090221915, InputEventId=0, HandleInputStart=2264103461828, AnimationStart=2264103462662, PerformTraversalsStart=2264107712453, DrawStart=2264230732287, FrameDeadline=2264106888581, FrameInterval=2264103449912, FrameStartTime=16666666, SyncQueued=2264233933537, SyncStart=2264256903662, IssueDrawCommandsStart=2264369438120, SwapBuffers=2264944858495, FrameCompleted=2264962955787, DequeueBufferDuration=2375, QueueBufferDuration=129000, GpuCompleted=2264962955787, SwapBuffersCompleted=2264955395829, DisplayPresentTime=0, CommandSubmissionCompleted=2264944858495,  
+15:04:14.127
+Android
+Log
+ 10-22 09:34:06.129 7173 I/Choreographer: Skipped 66 frames!  The application may be doing too much work on its main thread. 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:06.130 7173 W/ManagedChannelImpl: [{0}] Failed to resolve name. status={1} 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:06.132 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:124)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+}. 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:06.146 7173 W/TalentNexusAuth: Google Sign-In flow cancelled or dismissed: [16] Account reauth failed.
+androidx.credentials.exceptions.GetCredentialCancellationException: [16] Account reauth failed.
+at androidx.credentials.internal.ConversionUtilsKt.toJetpackGetException(ConversionUtils.kt:84)
+at androidx.credentials.CredentialProviderFrameworkImpl.convertToJetpackGetException$credentials_release(CredentialProviderFrameworkImpl.kt:295)
+at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:162)
+at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:150)
+at android.credentials.CredentialManager$GetCredentialTransport.lambda$onError$2(CredentialManager.java:820)
+at android.credentials.CredentialManager$GetCredentialTransport.$r8$lambda$_rg2Q59c21DJrPoh5aAnwNR78wQ(Unknown Source:0)
+at android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+at androidx.credentials.CredentialManager$$ExternalSyntheticLambda0.execute(D8$$SyntheticClass:0)
+at android.credentials.CredentialManager$GetCredentialTransport.onError(CredentialManager.java:819)
+at android.credentials.IGetCredentialCallback$Stub.onTransact(IGetCredentialCallback.java:121)
+at android.os.Binder.execTransactInternal(Binder.java:1505)
+at android.os.Binder.execTransact(Binder.java:1444) 
+15:04:14.127
+Android
+Log
+ 10-22 09:34:06.168 7173 I/HWUI    : Davey! duration=1131ms; Flags=1, FrameTimelineVsyncId=53624, IntendedVsync=2264090221915, Vsync=2264090221915, InputEventId=0, HandleInputStart=2264103461828, AnimationStart=2264103462662, PerformTraversalsStart=2264107712453, DrawStart=2264994159620, FrameDeadline=2264106888581, FrameInterval=2264103449912, FrameStartTime=16666666, SyncQueued=2265001527287, SyncStart=2265008205579, IssueDrawCommandsStart=2265039807412, SwapBuffers=2265203791787, FrameCompleted=2265228779371, DequeueBufferDuration=2625, QueueBufferDuration=842042, GpuCompleted=2265228779371, SwapBuffersCompleted=2265207730996, DisplayPresentTime=0, CommandSubmissionCompleted=2265203791787,  
+15:04:14.127
+Android
+Log
+ 10-22 09:34:06.174 7173 I/HWUI    : Davey! duration=1137ms; Flags=0, FrameTimelineVsyncId=53659, IntendedVsync=2264106888581, Vsync=2265206888537, InputEventId=0, HandleInputStart=2265213824162, AnimationStart=2265213825079, PerformTraversalsStart=2265214093079, DrawStart=2265214119246, FrameDeadline=2264990221879, FrameInterval=2265213662954, FrameStartTime=16666666, SyncQueued=2265214696037, SyncStart=2265216799329, IssueDrawCommandsStart=2265216830954, SwapBuffers=2265224655871, FrameCompleted=2265246348662, DequeueBufferDuration=1125, QueueBufferDuration=89417, GpuCompleted=2265246348662, SwapBuffersCompleted=2265232746287, DisplayPresentTime=0, CommandSubmissionCompleted=2265224655871,  
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:06.907 7173 W/Firestore: (26.5.0) [WatchStream]: (2449e4a) Stream closed with status: Status{code=UNAVAILABLE, description=Unable to resolve host firestore.googleapis.com, cause=java.lang.RuntimeException: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:223)
+at io.grpc.internal.DnsNameResolver.doResolve(DnsNameResolver.java:282)
+at io.grpc.internal.DnsNameResolver$Resolve.run(DnsNameResolver.java:318)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+at java.lang.Thread.run(Thread.java:1012)
+Caused by: java.net.UnknownHostException: Unable to resolve host "firestore.googleapis.com": No address associated with hostname
+at java.net.Inet6AddressImpl.lookupHostByName(Inet6AddressImpl.java:124)
+at java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:103)
+at java.net.InetAddress.getAllByName(InetAddress.java:1152)
+at io.grpc.internal.DnsNameResolver$JdkAddressResolver.resolveAddress(DnsNameResolver.java:632)
+at io.grpc.internal.DnsNameResolver.resolveAddresses(DnsNameResolver.java:219)
+... 5 more
+}. 
+15:04:14.127
+Android
+Debug
+ 10-22 09:34:07.675 7173 D/TrafficStats: tagSocket(134) with statsTag=0xffffffff, statsUid=-1 
+15:04:14.127
+Android
+Debug
+ 10-22 09:34:08.232 7173 D/EGL_emulation: app_time_stats: avg=583.00ms min=17.79ms max=1988.92ms count=4 
+15:04:14.127
+Android
+Debug
+ 10-22 09:34:09.241 7173 D/EGL_emulation: app_time_stats: avg=24.81ms min=3.47ms max=113.71ms count=22 
+15:04:14.127
+Android
+Debug
+ 10-22 09:34:10.265 7173 D/EGL_emulation: app_time_stats: avg=24.71ms min=1.81ms max=64.27ms count=24 
+15:04:14.127
+Android
+Debug
+ 10-22 09:34:11.273 7173 D/EGL_emulation: app_time_stats: avg=19.13ms min=1.37ms max=30.37ms count=25 
+15:04:14.127
+Android
+Log
+ 10-22 09:34:11.581 7173 I/CredManProvService: GetCredentialResponse error returned from framework 
+15:04:14.127
+Android
+Warning
+ 10-22 09:34:11.657 7173 W/TalentNexusAuth: Google Sign-In flow cancelled or dismissed: [16] Account reauth failed.
+androidx.credentials.exceptions.GetCredentialCancellationException: [16] Account reauth failed.
+at androidx.credentials.internal.ConversionUtilsKt.toJetpackGetException(ConversionUtils.kt:84)
+at androidx.credentials.CredentialProviderFrameworkImpl.convertToJetpackGetException$credentials_release(CredentialProviderFrameworkImpl.kt:295)
+at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:162)
+at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:150)
+at android.credentials.CredentialManager$GetCredentialTransport.lambda$onError$2(CredentialManager.java:820)
+at android.credentials.CredentialManager$GetCredentialTransport.$r8$lambda$_rg2Q59c21DJrPoh5aAnwNR78wQ(Unknown Source:0)
+at android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+at androidx.credentials.CredentialManager$$ExternalSyntheticLambda0.execute(D8$$SyntheticClass:0)
+at android.credentials.CredentialManager$GetCredentialTransport.onError(CredentialManager.java:819)
+at android.credentials.IGetCredentialCallback$Stub.onTransact(IGetCredentialCallback.java:121)
+at android.os.Binder.execTransactInternal(Binder.java:1505)
+at android.os.Binder.execTransact(Binder.java:1444) 
+15:04:34.161
+Android
+Debug
+ 10-22 09:34:24.001 7173 D/EGL_emulation: app_time_stats: avg=966.79ms min=8.09ms max=12261.50ms count=13 
+15:04:34.161
+Android
+Debug
+ 10-22 09:34:25.062 7173 D/EGL_emulation: app_time_stats: avg=18.41ms min=2.90ms max=41.17ms count=26 
+15:04:34.161
+Android
+Debug
+ 10-22 09:34:26.080 7173 D/EGL_emulation: app_time_stats: avg=28.09ms min=12.79ms max=48.42ms count=21 
+15:04:34.161
+Android
+Debug
+ 10-22 09:34:27.102 7173 D/EGL_emulation: app_time_stats: avg=26.11ms min=2.22ms max=63.52ms count=20 
+15:04:34.161
+Android
+Log
+ 10-22 09:34:27.682 7173 I/CredManProvService: GetCredentialResponse error returned from framework 
+15:04:34.161
+Android
+Warning
+ 10-22 09:34:27.780 7173 W/TalentNexusAuth: Google Sign-In flow cancelled or dismissed: [16] Account reauth failed.
+androidx.credentials.exceptions.GetCredentialCancellationException: [16] Account reauth failed.
+at androidx.credentials.internal.ConversionUtilsKt.toJetpackGetException(ConversionUtils.kt:84)
+at androidx.credentials.CredentialProviderFrameworkImpl.convertToJetpackGetException$credentials_release(CredentialProviderFrameworkImpl.kt:295)
+at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:162)
+at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:150)
+at android.credentials.CredentialManager$GetCredentialTransport.lambda$onError$2(CredentialManager.java:820)
+at android.credentials.CredentialManager$GetCredentialTransport.$r8$lambda$_rg2Q59c21DJrPoh5aAnwNR78wQ(Unknown Source:0)
+at android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+at androidx.credentials.CredentialManager$$ExternalSyntheticLambda0.execute(D8$$SyntheticClass:0)
+at android.credentials.CredentialManager$GetCredentialTransport.onError(CredentialManager.java:819)
+at android.credentials.IGetCredentialCallback$Stub.onTransact(IGetCredentialCallback.java:121)
+at android.os.Binder.execTransactInternal(Binder.java:1505)
+at android.os.Binder.execTransact(Binder.java:1444) 

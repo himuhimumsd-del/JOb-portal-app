@@ -121,27 +121,23 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Live Cloud Error Diagnostic Banner (Mock fallback is strictly disabled)
+            // Cloud Connection Notice
             val isCloudError = cloudConnectionState is com.example.jobportal.data.repository.CloudConnectionState.Error ||
                 (dataSourceErrorMessage != null && !isDemoMode)
 
             if (isCloudError) {
-                val errorDetails = when (val state = cloudConnectionState) {
-                    is com.example.jobportal.data.repository.CloudConnectionState.Error -> state.message
-                    else -> dataSourceErrorMessage ?: "Cloud Firestore connection unavailable."
-                }
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 6.dp),
                     shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.95f),
-                    shadowElevation = 2.dp
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    shadowElevation = 1.dp
                 ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(12.dp),
+                            .padding(14.dp),
                         verticalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         Row(
@@ -150,28 +146,22 @@ fun MainScreen(
                         ) {
                             Icon(
                                 imageVector = androidx.compose.material.icons.Icons.Default.Warning,
-                                contentDescription = "Connection Warning",
-                                tint = MaterialTheme.colorScheme.error,
+                                contentDescription = "Connection Notice",
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(20.dp)
                             )
                             Text(
-                                text = "Live Firestore Cloud Unavailable",
+                                text = "Unable to reach live jobs right now",
                                 style = MaterialTheme.typography.titleSmall.copy(
                                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.onErrorContainer
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             )
                         }
                         Text(
-                            text = "Target Database: ai-studio-android-jobporta-b95bcbd3-ac1e-47e0-8460-98c89a740c01\n$errorDetails",
+                            text = "Please check your network and tap Retry. You can also explore available jobs and features in Demo Mode.",
                             style = MaterialTheme.typography.bodySmall.copy(
-                                color = MaterialTheme.colorScheme.onErrorContainer
-                            )
-                        )
-                        Text(
-                            text = "Mock fallback is disabled to prevent simulated data leakage.",
-                            style = MaterialTheme.typography.labelSmall.copy(
-                                color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f)
                             )
                         )
                         Row(
@@ -181,28 +171,28 @@ fun MainScreen(
                             Button(
                                 onClick = { viewModel.retryLiveConnection() },
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.error
+                                    containerColor = MaterialTheme.colorScheme.primary
                                 ),
-                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                contentPadding = PaddingValues(horizontal = 14.dp, vertical = 4.dp),
                                 modifier = Modifier.height(34.dp)
                             ) {
                                 Text(
-                                    text = "Retry Live Cloud",
+                                    text = "Retry",
                                     style = MaterialTheme.typography.labelSmall.copy(
-                                        color = MaterialTheme.colorScheme.onError,
+                                        color = MaterialTheme.colorScheme.onPrimary,
                                         fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                                     )
                                 )
                             }
                             OutlinedButton(
                                 onClick = { viewModel.enableDemoMode() },
-                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                contentPadding = PaddingValues(horizontal = 14.dp, vertical = 4.dp),
                                 modifier = Modifier.height(34.dp)
                             ) {
                                 Text(
-                                    text = "Switch to Demo Mode",
+                                    text = "Explore in Demo Mode",
                                     style = MaterialTheme.typography.labelSmall.copy(
-                                        color = MaterialTheme.colorScheme.onErrorContainer
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 )
                             }
@@ -497,7 +487,11 @@ fun MainScreen(
             authUiState = authUiState,
             onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
             onSignOut = { viewModel.signOut(context) },
-            onDismiss = { viewModel.closeAuthDialog() }
+            onDismiss = { viewModel.closeAuthDialog() },
+            onEnableDemoMode = {
+                viewModel.enableDemoMode()
+                viewModel.closeAuthDialog()
+            }
         )
     }
 
@@ -598,11 +592,19 @@ fun MainScreen(
 
     // Premium Membership Access Dialog
     if (showPremiumAccessDialog) {
+        val checkoutUiState by viewModel.checkoutUiState.collectAsState()
         PremiumAccessScreen(
             isPremium = referralProfile.isPremium,
+            checkoutUiState = checkoutUiState,
+            onStartCashfreeCheckout = { act -> viewModel.startCashfreeCheckout(act) },
+            onVerifyWithServer = { orderId -> viewModel.verifyCashfreePaymentWithServer(orderId) },
+            onResetCheckoutState = { viewModel.resetCheckoutState() },
             onInitiatePayment = { viewModel.initiatePremiumPayment() },
             onVerifyPayment = { id, ref -> viewModel.verifyPremiumPayment(id, ref) },
-            onDismiss = { viewModel.closePremiumAccess() }
+            onDismiss = {
+                viewModel.resetCheckoutState()
+                viewModel.closePremiumAccess()
+            }
         )
     }
 

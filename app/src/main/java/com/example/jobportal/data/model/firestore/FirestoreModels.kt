@@ -718,6 +718,26 @@ data class ReferralEntity(
     }
 }
 
+data class ReferralCodeLookupEntity(
+    val code: String = "",
+    val ownerUid: String = "",
+    val createdAt: String = ""
+) {
+    fun toDocumentMap(): Map<String, Any?> = mapOf(
+        "code" to code,
+        "ownerUid" to ownerUid,
+        "createdAt" to createdAt
+    )
+
+    companion object {
+        fun fromDocument(code: String, map: Map<String, Any?>): ReferralCodeLookupEntity = ReferralCodeLookupEntity(
+            code = code,
+            ownerUid = map["ownerUid"] as? String ?: "",
+            createdAt = map["createdAt"] as? String ?: ""
+        )
+    }
+}
+
 data class LedgerEntityDoc(
     val id: String = "",
     val userId: String = "",

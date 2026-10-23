@@ -172,6 +172,19 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    // Referral Code Lookup: Safe mapping from code to ownerUid for invite attribution
+    match /referral_codes/{code} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() &&
+        request.resource.data.ownerUid == request.auth.uid &&
+        request.resource.data.code == code;
+      allow update: if isAuthenticated() &&
+        request.resource.data.ownerUid == request.auth.uid &&
+        resource.data.ownerUid == request.auth.uid &&
+        request.resource.data.code == code;
+      allow delete: if isAdmin();
+    }
+
     // Referrals: Private to participants; prevent self-referral; status updates server/admin only
     match /referrals/{referralId} {
       allow read: if isAuthenticated() &&

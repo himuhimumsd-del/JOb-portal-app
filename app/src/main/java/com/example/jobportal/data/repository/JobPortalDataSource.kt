@@ -73,10 +73,12 @@ interface JobPortalDataSource {
     fun updateEmployerProfile(profile: EmployerProfile)
     fun updateSeekerProfile(profile: JobSeekerProfile)
 
-    // Referral System Operations
+    // Referral & Cashfree Premium Operations
     fun applyReferralAttribution(referralCode: String): Boolean
     fun initiatePremiumPayment(): PremiumPaymentRecord
     fun processVerifiedPayment(paymentId: String, providerRef: String): Boolean
+    suspend fun createCashfreePremiumOrder(): Result<CashfreeOrderSession>
+    suspend fun verifyCashfreePayment(orderId: String, providerRef: String? = null): PaymentVerificationResult
     fun requestWithdrawal(amount: Int, payoutAccountDetails: String): Boolean
     fun processWithdrawalDecision(requestId: String, approve: Boolean, adminNotes: String): Boolean
 

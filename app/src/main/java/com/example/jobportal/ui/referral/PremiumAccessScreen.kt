@@ -1,6 +1,8 @@
 package com.example.jobportal.ui.referral
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,18 +28,41 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.jobportal.data.model.PaymentStatus
 import com.example.jobportal.data.model.PremiumPaymentRecord
+import com.example.jobportal.ui.CheckoutUiState
 import com.example.jobportal.ui.theme.*
+
+private fun Context.findActivity(): Activity? {
+    var ctx = this
+    while (ctx is ContextWrapper) {
+        if (ctx is Activity) return ctx
+        ctx = ctx.baseContext
+    }
+    return null
+}
 
 /**
  * Premium Membership Access Screen.
  * Explains ₹10 (1000 paise) executive tier benefits, displays payment gateway state,
- * and handles payment verification with clear error and retry states.
+ * and handles payment verification with clear error, cancelled, and retry states.
  */
 @Composable
 fun PremiumAccessScreen(
     isPremium: Boolean,
-    onInitiatePayment: () -> PremiumPaymentRecord,
-    onVerifyPayment: (String, String) -> Boolean,
+    checkoutUiState: CheckoutUiState = CheckoutUiState.Idle,
+    onStartCashfreeCheckout: (Activity) -> Unit = {},
+    onVerifyWithServer: (String) -> Unit = {},
+    onResetCheckoutState: () -> Unit = {},
+    onInitiatePayment: () -> PremiumPaymentRecord = {
+        PremiumPaymentRecord(
+            id = "mock_pay",
+            userId = "",
+            userEmail = "",
+            amount = 10,
+            currency = "INR",
+            createdAt = "Just now"
+        )
+    },
+    onVerifyPayment: (String, String) -> Boolean = { _, _ -> true },
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
@@ -109,7 +134,8 @@ fun PremiumAccessScreen(
                     }
                 }
 
-                when (paymentStep) {
+                val activeStep = if (checkoutUiState is CheckoutUiState.PaymentSuccess) PaymentStep.Success else paymentStep
+                when (activeStep) {
                     PaymentStep.AlreadyPremium -> {
                         Surface(
                             shape = RoundedCornerShape(16.dp),
@@ -253,19 +279,110 @@ fun PremiumAccessScreen(
                             }
                         }
 
+                        // Status Card if Checkout is Cancelled, Failed, or Pending
+                        when (val state = checkoutUiState) {
+                            is CheckoutUiState.PaymentCancelled -> {
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = AmberContainer,
+                                    modifier = Modifier.fillMaxWidth().testTag("payment_cancelled_banner")
+                                ) {
+                                    Column(modifier = Modifier.padding(12.dp)) {
+                                        Text(
+                                            text = "Payment Cancelled",
+                                            style = MaterialTheme.typography.titleSmall.copy(
+                                                color = AmberText,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = state.message.ifBlank { "Checkout session was cancelled by user." },
+                                            style = MaterialTheme.typography.bodySmall.copy(color = AmberText)
+                                        )
+                                    }
+                                }
+                            }
+                            is CheckoutUiState.PaymentFailed -> {
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = MaterialTheme.colorScheme.errorContainer,
+                                    modifier = Modifier.fillMaxWidth().testTag("payment_failed_banner")
+                                ) {
+                                    Column(modifier = Modifier.padding(12.dp)) {
+                                        Text(
+                                            text = "Payment Failed",
+                                            style = MaterialTheme.typography.titleSmall.copy(
+                                                color = MaterialTheme.colorScheme.onErrorContainer,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = state.message.ifBlank { "Could not complete payment with Cashfree." },
+                                            style = MaterialTheme.typography.bodySmall.copy(
+                                                color = MaterialTheme.colorScheme.onErrorContainer
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                            is CheckoutUiState.PaymentPending -> {
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = AmberContainer,
+                                    modifier = Modifier.fillMaxWidth().testTag("payment_pending_banner")
+                                ) {
+                                    Column(modifier = Modifier.padding(12.dp)) {
+                                        Text(
+                                            text = "Payment Pending Verification",
+                                            style = MaterialTheme.typography.titleSmall.copy(
+                                                color = AmberText,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = state.message,
+                                            style = MaterialTheme.typography.bodySmall.copy(color = AmberText)
+                                        )
+                                        Spacer(modifier = Modifier.height(8.dp))
+                                        OutlinedButton(
+                                            onClick = { onVerifyWithServer(state.orderId) },
+                                            modifier = Modifier.fillMaxWidth().testTag("check_payment_status_button")
+                                        ) {
+                                            Text("Check Verification Status")
+                                        }
+                                    }
+                                }
+                            }
+                            else -> {}
+                        }
+
+                        val isCheckoutBusy = checkoutUiState is CheckoutUiState.CreatingOrder ||
+                                checkoutUiState is CheckoutUiState.LaunchCheckout ||
+                                checkoutUiState is CheckoutUiState.VerifyingPayment ||
+                                isProcessing
+
                         // CTA Button
                         Button(
                             onClick = {
-                                isProcessing = true
-                                errorMessage = null
-                                try {
-                                    val record = onInitiatePayment()
-                                    currentPaymentRecord = record
-                                    paymentStep = PaymentStep.PaymentGateway(record)
-                                } catch (e: Exception) {
-                                    errorMessage = e.localizedMessage ?: "Failed to initiate payment."
-                                } finally {
-                                    isProcessing = false
+                                val activity = context.findActivity()
+                                if (activity != null) {
+                                    onResetCheckoutState()
+                                    onStartCashfreeCheckout(activity)
+                                } else {
+                                    isProcessing = true
+                                    errorMessage = null
+                                    try {
+                                        val record = onInitiatePayment()
+                                        currentPaymentRecord = record
+                                        paymentStep = PaymentStep.PaymentGateway(record)
+                                    } catch (e: Exception) {
+                                        errorMessage = e.localizedMessage ?: "Failed to initiate payment."
+                                    } finally {
+                                        isProcessing = false
+                                    }
                                 }
                             },
                             shape = RoundedCornerShape(12.dp),
@@ -277,21 +394,34 @@ fun PremiumAccessScreen(
                                 .fillMaxWidth()
                                 .height(50.dp)
                                 .testTag("continue_to_payment_button"),
-                            enabled = !isProcessing
+                            enabled = !isCheckoutBusy
                         ) {
-                            if (isProcessing) {
+                            if (isCheckoutBusy) {
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(20.dp),
                                     color = Color.White,
                                     strokeWidth = 2.dp
                                 )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                val busyLabel = when (checkoutUiState) {
+                                    is CheckoutUiState.CreatingOrder -> "Creating Cashfree Order..."
+                                    is CheckoutUiState.LaunchCheckout -> "Launching Sandbox Gateway..."
+                                    is CheckoutUiState.VerifyingPayment -> "Verifying with Server..."
+                                    else -> "Processing..."
+                                }
+                                Text(busyLabel, fontWeight = FontWeight.Bold)
                             } else {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
                                     Icon(imageVector = Icons.Default.Payment, contentDescription = null)
-                                    Text("Continue to Payment (₹10)", fontWeight = FontWeight.Bold)
+                                    val buttonLabel = if (checkoutUiState is CheckoutUiState.PaymentCancelled || checkoutUiState is CheckoutUiState.PaymentFailed) {
+                                        "Retry Payment (₹10)"
+                                    } else {
+                                        "Continue to Payment (₹10)"
+                                    }
+                                    Text(buttonLabel, fontWeight = FontWeight.Bold)
                                 }
                             }
                         }

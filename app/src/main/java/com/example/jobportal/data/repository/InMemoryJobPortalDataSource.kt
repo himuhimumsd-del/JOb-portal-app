@@ -787,6 +787,52 @@ class InMemoryJobPortalDataSource : JobPortalDataSource {
         return true
     }
 
+    override suspend fun createCashfreePremiumOrder(): Result<CashfreeOrderSession> {
+        val orderId = "order_tnx_demo_${System.currentTimeMillis()}"
+        val sessionId = "session_demo_${orderId}"
+        val record = PremiumPaymentRecord(
+            id = orderId,
+            userId = "usr-candidate-1",
+            userEmail = _seekerProfile.value.email,
+            amount = 10,
+            currency = "INR",
+            status = PaymentStatus.PENDING_VERIFICATION,
+            provider = "DEMO_SIMULATOR",
+            paymentSessionId = sessionId,
+            createdAt = "Just now"
+        )
+        _premiumPayments.value = listOf(record) + _premiumPayments.value
+        return Result.success(
+            CashfreeOrderSession(
+                orderId = orderId,
+                paymentSessionId = sessionId,
+                amount = 10,
+                currency = "INR",
+                environment = "SANDBOX"
+            )
+        )
+    }
+
+    override suspend fun verifyCashfreePayment(orderId: String, providerRef: String?): PaymentVerificationResult {
+        val success = processVerifiedPayment(orderId, providerRef ?: "demo_sim_${System.currentTimeMillis()}")
+        return if (success) {
+            PaymentVerificationResult(
+                status = "SUCCESS",
+                orderId = orderId,
+                isPremium = true,
+                rewardCredited = true,
+                message = "Demo simulation mode: verified in-memory only (not a live Cashfree payment)"
+            )
+        } else {
+            PaymentVerificationResult(
+                status = "FAILED",
+                orderId = orderId,
+                isPremium = false,
+                message = _errorMessage.value ?: "Verification failed in demo mode"
+            )
+        }
+    }
+
     override fun requestWithdrawal(amount: Int, payoutAccountDetails: String): Boolean {
         val profile = _referralProfile.value
         val requestedRupees = amount

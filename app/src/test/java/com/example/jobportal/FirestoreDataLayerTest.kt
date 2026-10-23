@@ -2,8 +2,11 @@ package com.example.jobportal
 
 import com.example.jobportal.data.model.*
 import com.example.jobportal.data.model.firestore.*
+import com.example.jobportal.data.payment.CashfreeCheckoutResult
 import com.example.jobportal.data.repository.InMemoryJobPortalDataSource
 import com.example.jobportal.data.repository.JobPortalRepository
+import com.example.jobportal.ui.CheckoutUiState
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -779,6 +782,195 @@ class FirestoreDataLayerTest {
             assertTrue(e.message?.contains("disconnected") == true)
         }
     }
+
+    @Test
+    fun testServerSideWithdrawalEligibilityValidation() {
+        val profileIneligibleReferrals = ReferralProfile(
+            referralCode = "TNX-ELIG1",
+            shareableLink = "https://talentnexus.app/join?ref=TNX-ELIG1",
+            successfulReferralsCount = 9, // Exactly 1 below threshold of 10
+            availableBalance = 100
+        )
+        assertFalse("Requires >= 10 successful referrals", profileIneligibleReferrals.meetsReferralsRequirement)
+        assertTrue(profileIneligibleReferrals.meetsBalanceRequirement)
+        assertFalse(profileIneligibleReferrals.meetsBothRedemptionRequirements)
+
+        val profileIneligibleBalance = ReferralProfile(
+            referralCode = "TNX-ELIG2",
+            shareableLink = "https://talentnexus.app/join?ref=TNX-ELIG2",
+            successfulReferralsCount = 15,
+            availableBalance = 49 // Exactly ₹1 below threshold of ₹50
+        )
+        assertTrue(profileIneligibleBalance.meetsReferralsRequirement)
+        assertFalse("Requires >= ₹50 balance", profileIneligibleBalance.meetsBalanceRequirement)
+        assertFalse(profileIneligibleBalance.meetsBothRedemptionRequirements)
+
+        val profileEligibleThreshold = ReferralProfile(
+            referralCode = "TNX-ELIG3",
+            shareableLink = "https://talentnexus.app/join?ref=TNX-ELIG3",
+            successfulReferralsCount = 10,
+            availableBalance = 50
+        )
+        assertTrue(profileEligibleThreshold.meetsReferralsRequirement)
+        assertTrue(profileEligibleThreshold.meetsBalanceRequirement)
+        assertTrue(profileEligibleThreshold.meetsBothRedemptionRequirements)
+    }
+
+    @Test
+    fun testUnauthenticatedWithdrawalRequestFailsImmediately() {
+        val ds = com.example.jobportal.data.repository.InMemoryJobPortalDataSource()
+        val repo = JobPortalRepository(ds)
+        // Set invalid amount < 50
+        val resUnder = repo.requestWithdrawal(40, "test@upi")
+        assertFalse("Withdrawals under ₹50 must be rejected", resUnder)
+
+        // Set blank payout details
+        val resBlank = repo.requestWithdrawal(50, "   ")
+        assertFalse("Blank payout details must be rejected", resBlank)
+    }
+
+    @Test
+    fun testCashfreeOrderSessionModelContract() {
+        val session = CashfreeOrderSession(
+            orderId = "order_tnx_test_12345",
+            paymentSessionId = "session_sandbox_order_tnx_test_12345",
+            amount = 10,
+            currency = "INR",
+            environment = "SANDBOX"
+        )
+        assertEquals("order_tnx_test_12345", session.orderId)
+        assertEquals("session_sandbox_order_tnx_test_12345", session.paymentSessionId)
+        assertEquals(10, session.amount)
+        assertEquals("INR", session.currency)
+        assertEquals("SANDBOX", session.environment)
+    }
+
+    @Test
+    fun testCashfreePaymentVerificationResultContract() {
+        val successResult = PaymentVerificationResult(
+            status = "SUCCESS",
+            orderId = "order_tnx_123",
+            isPremium = true,
+            rewardCredited = true,
+            message = "Payment verified"
+        )
+        assertEquals("SUCCESS", successResult.status)
+        assertTrue(successResult.isPremium)
+        assertTrue(successResult.rewardCredited)
+
+        val pendingResult = PaymentVerificationResult(
+            status = "PENDING",
+            orderId = "order_tnx_123",
+            isPremium = false,
+            message = "Pending gateway settlement"
+        )
+        assertEquals("PENDING", pendingResult.status)
+        assertFalse(pendingResult.isPremium)
+
+        val failedResult = PaymentVerificationResult(
+            status = "FAILED",
+            orderId = "order_tnx_123",
+            isPremium = false,
+            message = "Payment dropped by user"
+        )
+        assertEquals("FAILED", failedResult.status)
+        assertFalse(failedResult.isPremium)
+    }
+
+    @Test
+    fun testCashfreeCheckoutResultCallbackVariants() {
+        val success: CashfreeCheckoutResult = CashfreeCheckoutResult.Success("order_ok_1")
+        assertEquals("order_ok_1", (success as CashfreeCheckoutResult.Success).orderId)
+
+        val cancelled: CashfreeCheckoutResult = CashfreeCheckoutResult.Cancelled("order_cancel_1", "User pressed back")
+        assertEquals("order_cancel_1", (cancelled as CashfreeCheckoutResult.Cancelled).orderId)
+        assertEquals("User pressed back", cancelled.message)
+
+        val failure: CashfreeCheckoutResult = CashfreeCheckoutResult.Failure("order_fail_1", "Insufficient funds", "PAYMENT_DECLINED")
+        assertEquals("order_fail_1", (failure as CashfreeCheckoutResult.Failure).orderId)
+        assertEquals("Insufficient funds", failure.message)
+        assertEquals("PAYMENT_DECLINED", failure.code)
+    }
+
+    @Test
+    fun testInMemoryCreateCashfreePremiumOrderFlow() = runBlocking {
+        val ds = InMemoryJobPortalDataSource()
+        val repo = JobPortalRepository(ds)
+
+        val orderResult = repo.createCashfreePremiumOrder()
+        assertTrue("Order creation must succeed in demo/in-memory mode", orderResult.isSuccess)
+
+        val session = orderResult.getOrThrow()
+        assertTrue("orderId must be prefixed with order_tnx", session.orderId.startsWith("order_tnx"))
+        assertTrue("paymentSessionId must be present", session.paymentSessionId.isNotBlank())
+        assertEquals("Order amount must be fixed to ₹10", 10, session.amount)
+        assertEquals("Currency must be INR", "INR", session.currency)
+        assertEquals("Environment must be SANDBOX", "SANDBOX", session.environment)
+
+        // Verify payment record in repository
+        val payments = repo.premiumPayments.value
+        val paymentRecord = payments.find { it.id == session.orderId }
+        assertNotNull("Payment record must be created in pending status", paymentRecord)
+        assertEquals(PaymentStatus.PENDING_VERIFICATION, paymentRecord?.status)
+        assertEquals("DEMO_SIMULATOR", paymentRecord?.provider)
+    }
+
+    @Test
+    fun testInMemoryVerifyCashfreePaymentFlow() = runBlocking {
+        val ds = InMemoryJobPortalDataSource()
+        val repo = JobPortalRepository(ds)
+
+        // Initial state: not premium
+        assertFalse("User must not be premium initially", repo.referralProfile.value.isPremium)
+
+        // Create order
+        val orderResult = repo.createCashfreePremiumOrder().getOrThrow()
+
+        // Verify payment with server
+        val verification = repo.verifyCashfreePayment(orderResult.orderId, "txn_mock_success")
+        assertEquals("SUCCESS", verification.status)
+        assertTrue("Verification must confirm isPremium = true", verification.isPremium)
+
+        // Profile must now reflect premium status
+        assertTrue("Referral profile must be updated to premium", repo.referralProfile.value.isPremium)
+    }
+
+    @Test
+    fun testCheckoutUiStateTransitions() {
+        val idle: CheckoutUiState = CheckoutUiState.Idle
+        val creating: CheckoutUiState = CheckoutUiState.CreatingOrder
+        val launch: CheckoutUiState = CheckoutUiState.LaunchCheckout("order_1", "sess_1")
+        val verifying: CheckoutUiState = CheckoutUiState.VerifyingPayment
+        val success: CheckoutUiState = CheckoutUiState.PaymentSuccess("order_1")
+        val pending: CheckoutUiState = CheckoutUiState.PaymentPending("order_1", "Waiting")
+        val cancelled: CheckoutUiState = CheckoutUiState.PaymentCancelled("order_1", "Cancelled")
+        val failed: CheckoutUiState = CheckoutUiState.PaymentFailed("order_1", "Failed")
+
+        assertTrue(idle is CheckoutUiState.Idle)
+        assertTrue(creating is CheckoutUiState.CreatingOrder)
+        assertEquals("order_1", (launch as CheckoutUiState.LaunchCheckout).orderId)
+        assertTrue(verifying is CheckoutUiState.VerifyingPayment)
+        assertEquals("order_1", (success as CheckoutUiState.PaymentSuccess).orderId)
+        assertEquals("Waiting", (pending as CheckoutUiState.PaymentPending).message)
+        assertEquals("Cancelled", (cancelled as CheckoutUiState.PaymentCancelled).message)
+        assertEquals("Failed", (failed as CheckoutUiState.PaymentFailed).message)
+    }
+
+    @Test
+    fun testUnauthenticatedStateDefaultsAndNamedDatabaseValidation() {
+        val repo = JobPortalRepository(InMemoryJobPortalDataSource())
+        try {
+            repo.switchToFirestore("(default)")
+            fail("Must reject (default) databaseId")
+        } catch (e: IllegalArgumentException) {
+            assertTrue(e.message?.contains("non-default") == true)
+        }
+
+        try {
+            repo.switchToFirestore("")
+            fail("Must reject blank databaseId")
+        } catch (e: IllegalArgumentException) {
+            assertTrue(e.message?.contains("non-default") == true)
+        }
+    }
 }
-
-

@@ -114,10 +114,18 @@ class AuthRepository(
                 Result.failure(IllegalStateException(errorMsg))
             }
         } catch (e: GetCredentialCancellationException) {
-            Log.w(TAG, "Google Sign-In flow cancelled or dismissed: ${e.message}", e)
-            // Reset to unauthenticated state without displaying a harsh error banner
-            _authUiState.value = AuthUiState.Unauthenticated
-            Result.failure(e)
+            val isReauthFailure = e.message?.contains("Account reauth failed", ignoreCase = true) == true ||
+                                  e.message?.contains("[16]", ignoreCase = true) == true
+            if (isReauthFailure) {
+                val errorMsg = "Google Account reauth failed on device/emulator. Please add a Google account in Android Settings -> Passwords & accounts, or test on a physical device."
+                Log.w(TAG, errorMsg, e)
+                _authUiState.value = AuthUiState.Error(errorMsg)
+                Result.failure(IllegalStateException(errorMsg, e))
+            } else {
+                Log.w(TAG, "Google Sign-In flow cancelled or dismissed: ${e.message}", e)
+                _authUiState.value = AuthUiState.Unauthenticated
+                Result.failure(e)
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Google Sign-In failed", e)
             val errorMsg = e.localizedMessage ?: "Sign-in failed. Please try again."

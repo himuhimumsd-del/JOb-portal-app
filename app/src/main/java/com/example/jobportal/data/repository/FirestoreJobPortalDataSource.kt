@@ -6,6 +6,7 @@ import com.example.jobportal.data.model.firestore.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.functions.FirebaseFunctions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,6 +32,7 @@ class FirestoreJobPortalDataSource(
     private val firestore: FirebaseFirestore,
     val databaseId: String = "ai-studio-android-jobporta-b95bcbd3-ac1e-47e0-8460-98c89a740c01",
     private val auth: FirebaseAuth = FirebaseAuth.getInstance(),
+    private val functions: FirebaseFunctions = try { FirebaseFunctions.getInstance("us-central1") } catch (e: Throwable) { FirebaseFunctions.getInstance() },
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 ) : JobPortalDataSource {
 
@@ -167,9 +169,18 @@ class FirestoreJobPortalDataSource(
     private var withdrawalsListener: ListenerRegistration? = null
     private var paymentsListener: ListenerRegistration? = null
 
+    private var lastObservedUid: String? = null
+
     private val authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
         val user = firebaseAuth.currentUser
-        if (user != null) {
+        val uid = user?.uid
+        if (user != null && !user.isAnonymous) {
+            val userChanged = (lastObservedUid != null && lastObservedUid != uid)
+            if (userChanged) {
+                detachUserScopedListeners()
+                clearUserScopedState()
+            }
+            lastObservedUid = uid
             _seekerProfile.value = _seekerProfile.value.copy(
                 fullName = user.displayName?.ifBlank { "Candidate" } ?: "Candidate",
                 email = user.email ?: ""
@@ -177,6 +188,7 @@ class FirestoreJobPortalDataSource(
             configureRoleListeners(_currentRole.value)
             startReferralListeners()
         } else {
+            lastObservedUid = null
             detachUserScopedListeners()
             clearUserScopedState()
         }
@@ -196,8 +208,8 @@ class FirestoreJobPortalDataSource(
             .whereEqualTo("status", JobStatus.ACTIVE.name)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error observing active jobs in database '$databaseId': ${error.code} - ${error.message}")
-                    _errorMessage.value = "Failed to load live jobs from '$databaseId' (${error.code.name}): ${error.localizedMessage ?: "Database error"}"
+                    Log.w(tag, "Observing active jobs in database '$databaseId': ${error.code} - ${error.message}")
+                    _errorMessage.value = "Unable to load live job postings right now. Please check your internet connection."
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -216,8 +228,8 @@ class FirestoreJobPortalDataSource(
         categoriesListener = firestore.collection("taxonomy_categories")
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error observing categories: ${error.message}", error)
-                    _errorMessage.value = "Failed to load categories: ${error.localizedMessage}"
+                    Log.w(tag, "Observing categories: ${error.message}")
+                    _errorMessage.value = "Unable to load job categories right now."
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -231,11 +243,25 @@ class FirestoreJobPortalDataSource(
                 }
             }
 
-        configureRoleListeners(_currentRole.value)
-        startReferralListeners()
+        // Only start user-specific listeners if user is signed in with a verified account
+        val currentUser = auth.currentUser
+        if (currentUser != null && !currentUser.isAnonymous) {
+            lastObservedUid = currentUser.uid
+            configureRoleListeners(_currentRole.value)
+            startReferralListeners()
+        } else {
+            lastObservedUid = null
+            detachUserScopedListeners()
+            clearUserScopedState()
+        }
     }
 
     private fun configureRoleListeners(role: UserRole) {
+        val user = auth.currentUser
+        if (user == null || user.isAnonymous) {
+            detachUserScopedListeners()
+            return
+        }
         if (role == UserRole.JOB_SEEKER) {
             employerAppsListener?.remove()
             employerAppsListener = null
@@ -255,12 +281,14 @@ class FirestoreJobPortalDataSource(
 
     private fun startCandidateApplicationsListener() {
         candidateAppsListener?.remove()
-        val uid = auth.currentUser?.uid ?: return
+        val user = auth.currentUser
+        if (user == null || user.isAnonymous) return
+        val uid = user.uid
         candidateAppsListener = firestore.collection("applications")
             .whereEqualTo("candidateId", uid)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error listening to candidate applications: ${error.message}", error)
+                    Log.w(tag, "Candidate applications listener: ${error.message}")
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -276,12 +304,14 @@ class FirestoreJobPortalDataSource(
 
     private fun startCandidateInterviewsListener() {
         candidateInterviewsListener?.remove()
-        val uid = auth.currentUser?.uid ?: return
+        val user = auth.currentUser
+        if (user == null || user.isAnonymous) return
+        val uid = user.uid
         candidateInterviewsListener = firestore.collection("interviews")
             .whereEqualTo("candidateId", uid)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error listening to candidate interviews: ${error.message}", error)
+                    Log.w(tag, "Candidate interviews listener: ${error.message}")
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -297,12 +327,14 @@ class FirestoreJobPortalDataSource(
 
     private fun startEmployerApplicationsListener() {
         employerAppsListener?.remove()
+        val user = auth.currentUser
+        if (user == null || user.isAnonymous) return
         val companyId = "org-${_employerProfile.value.companyName.lowercase().replace(" ", "-")}"
         employerAppsListener = firestore.collection("applications")
             .whereEqualTo("companyId", companyId)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error listening to employer applicants: ${error.message}", error)
+                    Log.w(tag, "Employer applicants listener: ${error.message}")
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -318,12 +350,14 @@ class FirestoreJobPortalDataSource(
 
     private fun startEmployerInterviewsListener() {
         employerInterviewsListener?.remove()
+        val user = auth.currentUser
+        if (user == null || user.isAnonymous) return
         val companyId = "org-${_employerProfile.value.companyName.lowercase().replace(" ", "-")}"
         employerInterviewsListener = firestore.collection("interviews")
             .whereEqualTo("companyId", companyId)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error listening to employer interviews: ${error.message}", error)
+                    Log.w(tag, "Employer interviews listener: ${error.message}")
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -338,32 +372,36 @@ class FirestoreJobPortalDataSource(
     }
 
     private fun startReferralListeners() {
-        val uid = auth.currentUser?.uid ?: return
+        val user = auth.currentUser
+        if (user == null || user.isAnonymous) return
+        val uid = user.uid
 
         // 1. User profile listener for referral code & balances
         userProfileListener?.remove()
         userProfileListener = firestore.collection("users").document(uid)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error observing user profile: ${error.message}", error)
+                    Log.w(tag, "User profile listener: ${error.message}")
                     return@addSnapshotListener
                 }
                 if (snapshot != null && snapshot.exists()) {
-                    val user = UserEntity.fromDocument(snapshot.id, snapshot.data ?: emptyMap())
-                    val available = user.availableReferralBalance
-                    val successful = user.successfulReferralsCount
+                    val userDoc = UserEntity.fromDocument(snapshot.id, snapshot.data ?: emptyMap())
+                    val available = userDoc.availableReferralBalance
+                    val successful = userDoc.successfulReferralsCount
                     val isEligible = (available >= 50 && successful >= 10)
-                    val code = user.referralCode.ifBlank { "TNX-" + uid.take(6).uppercase() }
+                    val code = userDoc.referralCode.ifBlank { "TNX-" + uid.take(6).uppercase() }
+
+                    registerReferralCodeLookup(code, uid)
 
                     _referralProfile.value = _referralProfile.value.copy(
                         referralCode = code,
                         shareableLink = "https://talentnexus.app/join?ref=$code",
                         successfulReferralsCount = successful,
-                        totalRewardsEarned = user.totalEarnedRewards,
+                        totalRewardsEarned = userDoc.totalEarnedRewards,
                         availableBalance = available,
-                        reservedBalance = user.reservedWithdrawalBalance,
+                        reservedBalance = userDoc.reservedWithdrawalBalance,
                         isEligibleForWithdrawal = isEligible,
-                        isPremium = user.isPremium
+                        isPremium = userDoc.isPremium
                     )
                 } else if (snapshot != null && !snapshot.exists()) {
                     val newCode = "TNX-" + UUID.randomUUID().toString().take(6).uppercase()
@@ -375,6 +413,7 @@ class FirestoreJobPortalDataSource(
                         createdAt = "Just now"
                     )
                     firestore.collection("users").document(uid).set(initialUser.toDocumentMap())
+                    registerReferralCodeLookup(newCode, uid)
                 }
             }
 
@@ -384,7 +423,7 @@ class FirestoreJobPortalDataSource(
             .whereEqualTo("referrerUid", uid)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e(tag, "Error observing referrals: ${error.message}", error)
+                    Log.w(tag, "Referrals listener closed or denied: ${error.message}")
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -407,7 +446,10 @@ class FirestoreJobPortalDataSource(
         ledgerListener = firestore.collection("referral_ledger")
             .whereEqualTo("userId", uid)
             .addSnapshotListener { snapshot, error ->
-                if (error != null) return@addSnapshotListener
+                if (error != null) {
+                    Log.w(tag, "Ledger listener: ${error.message}")
+                    return@addSnapshotListener
+                }
                 if (snapshot != null) {
                     val items = snapshot.documents.mapNotNull { doc ->
                         doc.data?.let { LedgerEntityDoc.fromDocument(doc.id, it).toDomainModel() }
@@ -424,7 +466,10 @@ class FirestoreJobPortalDataSource(
             firestore.collection("withdrawal_requests").whereEqualTo("userId", uid)
         }
         withdrawalsListener = wdrQuery.addSnapshotListener { snapshot, error ->
-            if (error != null) return@addSnapshotListener
+            if (error != null) {
+                Log.w(tag, "Withdrawals listener: ${error.message}")
+                return@addSnapshotListener
+            }
             if (snapshot != null) {
                 val items = snapshot.documents.mapNotNull { doc ->
                     doc.data?.let { WithdrawalEntity.fromDocument(doc.id, it).toDomainModel() }
@@ -438,7 +483,10 @@ class FirestoreJobPortalDataSource(
         paymentsListener = firestore.collection("premium_payments")
             .whereEqualTo("userId", uid)
             .addSnapshotListener { snapshot, error ->
-                if (error != null) return@addSnapshotListener
+                if (error != null) {
+                    Log.w(tag, "Premium payments listener: ${error.message}")
+                    return@addSnapshotListener
+                }
                 if (snapshot != null) {
                     val items = snapshot.documents.mapNotNull { doc ->
                         doc.data?.let { PaymentEntity.fromDocument(doc.id, it).toDomainModel() }
@@ -446,6 +494,25 @@ class FirestoreJobPortalDataSource(
                     _premiumPayments.value = items
                 }
             }
+    }
+
+    private fun registerReferralCodeLookup(code: String, ownerUid: String) {
+        if (code.isBlank() || ownerUid.isBlank()) return
+        val lookupRef = firestore.collection("referral_codes").document(code)
+        lookupRef.get().addOnSuccessListener { doc ->
+            if (!doc.exists()) {
+                val lookupEntity = ReferralCodeLookupEntity(
+                    code = code,
+                    ownerUid = ownerUid,
+                    createdAt = "Just now"
+                )
+                lookupRef.set(lookupEntity.toDocumentMap()).addOnFailureListener { e ->
+                    Log.w(tag, "Failed to register referral code lookup for '$code': ${e.message}")
+                }
+            }
+        }.addOnFailureListener { e ->
+            Log.w(tag, "Failed to check referral code lookup for '$code': ${e.message}")
+        }
     }
 
     private fun detachUserScopedListeners() {
@@ -500,6 +567,8 @@ class FirestoreJobPortalDataSource(
         categoriesListener?.remove()
         categoriesListener = null
         detachUserScopedListeners()
+        clearUserScopedState()
+        lastObservedUid = null
     }
 
     override fun cleanup() {
@@ -1230,38 +1299,122 @@ class FirestoreJobPortalDataSource(
     override fun initiatePremiumPayment(): PremiumPaymentRecord {
         val user = auth.currentUser
         val uid = user?.uid ?: "unauthenticated_caller"
-        val paymentId = "pay_${UUID.randomUUID().toString().take(8)}"
-        val record = PremiumPaymentRecord(
+        val paymentId = "order_cf_${UUID.randomUUID().toString().take(8)}"
+        return PremiumPaymentRecord(
             id = paymentId,
             userId = uid,
             userEmail = user?.email.orEmpty(),
             amount = 10,
             currency = "INR",
             status = PaymentStatus.PENDING_VERIFICATION,
-            provider = "MOCK_GATEWAY",
+            provider = "CASHFREE",
             createdAt = "Just now"
         )
+    }
 
-        scope.launch {
-            try {
-                val paymentEntity = PaymentEntity(
-                    id = paymentId,
-                    userId = uid,
-                    userEmail = user?.email.orEmpty(),
-                    amount = 10,
-                    currency = "INR",
-                    status = PaymentStatus.PENDING_VERIFICATION.name,
-                    provider = "MOCK_GATEWAY",
-                    createdAt = "Just now"
-                )
-                firestore.collection("premium_payments")
-                    .document(paymentId)
-                    .set(paymentEntity.toDocumentMap())
-            } catch (e: Exception) {
-                Log.e(tag, "Failed to initiate payment: ${e.message}", e)
-            }
+    override suspend fun createCashfreePremiumOrder(): Result<CashfreeOrderSession> {
+        val user = auth.currentUser
+        if (user == null) {
+            val err = "Authentication required to create a premium order."
+            _errorMessage.value = err
+            return Result.failure(IllegalStateException(err))
         }
-        return record
+
+        return try {
+            _isLoading.value = true
+            val callable = functions.getHttpsCallable("createCashfreePremiumOrder")
+            val result = callable.call(emptyMap<String, Any>()).await()
+
+            @Suppress("UNCHECKED_CAST")
+            val data = result.getData() as? Map<String, Any?>
+            val orderId = data?.get("orderId") as? String
+            val paymentSessionId = data?.get("paymentSessionId") as? String
+            val amount = (data?.get("amount") as? Number)?.toInt() ?: 10
+            val currency = data?.get("currency") as? String ?: "INR"
+            val environment = data?.get("environment") as? String ?: "SANDBOX"
+
+            if (orderId.isNullOrBlank() || paymentSessionId.isNullOrBlank()) {
+                val msg = "Server failed to return valid Cashfree order credentials."
+                _errorMessage.value = msg
+                Result.failure(IllegalStateException(msg))
+            } else {
+                _errorMessage.value = null
+                Result.success(
+                    CashfreeOrderSession(
+                        orderId = orderId,
+                        paymentSessionId = paymentSessionId,
+                        amount = amount,
+                        currency = currency,
+                        environment = environment
+                    )
+                )
+            }
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to call createCashfreePremiumOrder: ${e.message}", e)
+            val msg = e.localizedMessage ?: "Failed to create Cashfree order on server"
+            _errorMessage.value = msg
+            Result.failure(e)
+        } finally {
+            _isLoading.value = false
+        }
+    }
+
+    override suspend fun verifyCashfreePayment(orderId: String, providerRef: String?): PaymentVerificationResult {
+        val user = auth.currentUser
+        if (user == null) {
+            val msg = "Authentication required for payment verification."
+            _errorMessage.value = msg
+            return PaymentVerificationResult(
+                status = "FAILED",
+                orderId = orderId,
+                message = msg
+            )
+        }
+
+        return try {
+            _isLoading.value = true
+            val payload = mutableMapOf<String, Any>("orderId" to orderId)
+            if (!providerRef.isNullOrBlank()) {
+                payload["providerRef"] = providerRef
+            }
+
+            val callable = functions.getHttpsCallable("verifyCashfreePremiumPayment")
+            val result = callable.call(payload).await()
+
+            @Suppress("UNCHECKED_CAST")
+            val responseData = result.getData() as? Map<String, Any?>
+            val status = responseData?.get("status") as? String ?: "FAILED"
+            val isPremium = responseData?.get("isPremium") as? Boolean ?: false
+            val rewardCredited = responseData?.get("rewardCredited") as? Boolean ?: false
+            val message = responseData?.get("message") as? String
+
+            if (status == "SUCCESS" && isPremium) {
+                Log.d(tag, "Order $orderId verified successfully by backend. Premium unlocked.")
+                _errorMessage.value = null
+            } else {
+                Log.w(tag, "Order $orderId verification returned status: $status, message: $message")
+                _errorMessage.value = message
+            }
+
+            PaymentVerificationResult(
+                status = status,
+                orderId = orderId,
+                isPremium = isPremium,
+                rewardCredited = rewardCredited,
+                message = message
+            )
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to verify order $orderId via backend: ${e.message}", e)
+            val errMsg = e.localizedMessage ?: "Backend verification error"
+            _errorMessage.value = errMsg
+            PaymentVerificationResult(
+                status = "FAILED",
+                orderId = orderId,
+                message = errMsg
+            )
+        } finally {
+            _isLoading.value = false
+        }
     }
 
     override fun processVerifiedPayment(paymentId: String, providerRef: String): Boolean {
@@ -1272,115 +1425,7 @@ class FirestoreJobPortalDataSource(
         }
 
         scope.launch {
-            try {
-                _isLoading.value = true
-                val paymentRef = firestore.collection("premium_payments").document(paymentId)
-                val userRef = firestore.collection("users").document(user.uid)
-
-                firestore.runTransaction { transaction ->
-                    val paymentDoc = transaction.get(paymentRef)
-                    if (!paymentDoc.exists()) {
-                        throw NoSuchElementException("Payment record $paymentId not found.")
-                    }
-                    val currentStatus = paymentDoc.getString("status")
-                    if (currentStatus == PaymentStatus.VERIFIED.name) {
-                        return@runTransaction
-                    }
-
-                    // 1. Mark payment verified
-                    transaction.update(
-                        paymentRef,
-                        mapOf(
-                            "status" to PaymentStatus.VERIFIED.name,
-                            "providerTransactionRef" to providerRef,
-                            "verifiedAt" to "Just now"
-                        )
-                    )
-
-                    // 2. Grant premium status to payer
-                    transaction.update(
-                        userRef,
-                        mapOf(
-                            "isPremium" to true,
-                            "premiumPurchasedAt" to "Just now"
-                        )
-                    )
-
-                    // 3. Check referral attribution
-                    val userDoc = transaction.get(userRef)
-                    val referrerUid = userDoc.getString("referredByUid")
-                    val referralCode = userDoc.getString("referredByCode")
-
-                    if (!referrerUid.isNullOrBlank() && referrerUid != user.uid) {
-                        val refId = "ref_${referrerUid}_${user.uid}"
-                        val refDoc = firestore.collection("referrals").document(refId)
-                        val refSnapshot = transaction.get(refDoc)
-
-                        val isAlreadyRewarded = refSnapshot.exists() &&
-                            refSnapshot.getString("status") == ReferralStatus.REWARD_CREDITED.name
-
-                        if (!isAlreadyRewarded) {
-                            transaction.set(
-                                refDoc,
-                                mapOf(
-                                    "id" to refId,
-                                    "referrerUid" to referrerUid,
-                                    "referredUid" to user.uid,
-                                    "referredName" to (user.displayName.orEmpty().ifBlank { "Referred Member" }),
-                                    "referralCode" to (referralCode ?: ""),
-                                    "status" to ReferralStatus.REWARD_CREDITED.name,
-                                    "rewardAmount" to 5,
-                                    "qualifyingPaymentRef" to paymentId,
-                                    "createdAt" to (refSnapshot.getString("createdAt") ?: "Just now"),
-                                    "rewardedAt" to "Just now"
-                                )
-                            )
-
-                            val referrerRef = firestore.collection("users").document(referrerUid)
-                            val referrerDoc = transaction.get(referrerRef)
-                            if (referrerDoc.exists()) {
-                                val curBal = (referrerDoc.getLong("availableReferralBalance") ?: 0L).toInt()
-                                val curEarned = (referrerDoc.getLong("totalEarnedRewards") ?: 0L).toInt()
-                                val curSuccessful = (referrerDoc.getLong("successfulReferralsCount") ?: 0L).toInt()
-
-                                transaction.update(
-                                    referrerRef,
-                                    mapOf(
-                                        "availableReferralBalance" to (curBal + 5),
-                                        "totalEarnedRewards" to (curEarned + 5),
-                                        "successfulReferralsCount" to (curSuccessful + 1)
-                                    )
-                                )
-                            }
-
-                            val ledgerRef = firestore.collection("referral_ledger").document("ledger_reward_${paymentId}")
-                            transaction.set(
-                                ledgerRef,
-                                mapOf(
-                                    "id" to "ledger_reward_${paymentId}",
-                                    "userId" to referrerUid,
-                                    "type" to LedgerType.REFERRAL_REWARD.name,
-                                    "amount" to 5,
-                                    "referenceId" to paymentId,
-                                    "notes" to "Referral reward: ₹5 for verified premium payment $providerRef",
-                                    "timestamp" to "Just now"
-                                )
-                            )
-                        }
-                    }
-                }.addOnSuccessListener {
-                    Log.d(tag, "Payment $paymentId successfully verified and rewards processed")
-                    _errorMessage.value = null
-                    _isLoading.value = false
-                }.addOnFailureListener { e ->
-                    Log.e(tag, "Failed to verify payment: ${e.message}", e)
-                    _errorMessage.value = "Payment verification error: ${e.localizedMessage}"
-                    _isLoading.value = false
-                }
-            } catch (t: Throwable) {
-                _errorMessage.value = t.localizedMessage
-                _isLoading.value = false
-            }
+            verifyCashfreePayment(paymentId, providerRef)
         }
         return true
     }
@@ -1400,88 +1445,37 @@ class FirestoreJobPortalDataSource(
             return false
         }
 
-        val reqId = "wdr_${UUID.randomUUID().toString().take(8)}"
+        val method = if (payoutAccountDetails.contains("@")) "UPI" else "Bank Transfer (NEFT)"
 
         scope.launch {
             try {
                 _isLoading.value = true
-                val userRef = firestore.collection("users").document(user.uid)
-                val wdrRef = firestore.collection("withdrawal_requests").document(reqId)
-                val ledgerRef = firestore.collection("referral_ledger").document("ledger_reserve_${reqId}")
 
-                firestore.runTransaction { transaction ->
-                    val userDoc = transaction.get(userRef)
-                    if (!userDoc.exists()) {
-                        throw NoSuchElementException("User account not found.")
-                    }
-
-                    val available = (userDoc.getLong("availableReferralBalance") ?: 0L).toInt()
-                    val reserved = (userDoc.getLong("reservedWithdrawalBalance") ?: 0L).toInt()
-                    val successful = (userDoc.getLong("successfulReferralsCount") ?: 0L).toInt()
-
-                    val requestedRupees = amount
-
-                    if (successful < 10) {
-                        throw IllegalStateException("Redemption blocked: Requires at least 10 successful referrals (currently $successful).")
-                    }
-                    if (available < 50) {
-                        throw IllegalStateException("Redemption blocked: Requires at least ₹50 available referral balance (currently ₹$available).")
-                    }
-                    if (requestedRupees < 50) {
-                        throw IllegalStateException("Minimum withdrawal amount is ₹50.")
-                    }
-                    if (requestedRupees > available) {
-                        throw IllegalStateException("Insufficient balance. Available: ₹$available, Requested: ₹$requestedRupees")
-                    }
-
-                    // 1. Atomically reserve balance
-                    transaction.update(
-                        userRef,
-                        mapOf(
-                            "availableReferralBalance" to (available - requestedRupees),
-                            "reservedWithdrawalBalance" to (reserved + requestedRupees)
-                        )
+                // Delegate balance reservation and withdrawal creation to Cloud Function
+                val callable = functions.getHttpsCallable("requestReferralWithdrawal")
+                val result = callable.call(
+                    mapOf(
+                        "amount" to amount,
+                        "payoutAccountDetails" to payoutAccountDetails.trim(),
+                        "payoutMethod" to method
                     )
+                ).await()
 
-                    // 2. Create withdrawal request
-                    val method = if (payoutAccountDetails.contains("@")) "UPI" else "Bank Transfer (NEFT)"
-                    val wdrEntity = WithdrawalEntity(
-                        id = reqId,
-                        userId = user.uid,
-                        userName = user.displayName.orEmpty().ifBlank { "भर्ती-App Member" },
-                        userEmail = user.email.orEmpty(),
-                        amount = amount,
-                        payoutMethod = method,
-                        payoutAccountDetails = payoutAccountDetails,
-                        status = WithdrawalStatus.REQUESTED.name,
-                        requestedAt = "Just now"
-                    )
-                    transaction.set(wdrRef, wdrEntity.toDocumentMap())
+                @Suppress("UNCHECKED_CAST")
+                val responseData = result.getData() as? Map<String, Any?>
+                val success = responseData?.get("success") as? Boolean ?: false
 
-                    // 3. Create reservation ledger entry
-                    transaction.set(
-                        ledgerRef,
-                        mapOf(
-                            "id" to "ledger_reserve_${reqId}",
-                            "userId" to user.uid,
-                            "type" to LedgerType.WITHDRAWAL_REQUEST_RESERVED.name,
-                            "amount" to -amount,
-                            "referenceId" to reqId,
-                            "notes" to "Reserved ₹$amount for withdrawal to $payoutAccountDetails",
-                            "timestamp" to "Just now"
-                        )
-                    )
-                }.addOnSuccessListener {
-                    Log.d(tag, "Withdrawal $reqId requested and ₹$amount reserved atomically")
+                if (success) {
+                    val reqId = responseData?.get("requestId") as? String ?: "wdr_ok"
+                    Log.d(tag, "Withdrawal $reqId requested and ₹$amount reserved by backend function.")
                     _errorMessage.value = null
-                    _isLoading.value = false
-                }.addOnFailureListener { e ->
-                    Log.e(tag, "Withdrawal request failed: ${e.message}", e)
-                    _errorMessage.value = e.localizedMessage
-                    _isLoading.value = false
+                } else {
+                    _errorMessage.value = responseData?.get("message") as? String ?: "Withdrawal request failed."
                 }
-            } catch (t: Throwable) {
-                _errorMessage.value = t.localizedMessage
+            } catch (e: Exception) {
+                Log.e(tag, "Withdrawal request failed via backend: ${e.message}", e)
+                _errorMessage.value = e.localizedMessage ?: "Failed to submit withdrawal request."
+            } finally {
                 _isLoading.value = false
             }
         }

@@ -21,17 +21,18 @@ class MainActivity : ComponentActivity() {
         // Handle referral deep link if present: https://talentnexus.app/join?ref=...
         handleReferralIntent(intent)
 
-        // Initialize live Cloud Firestore connection using named database ID from firebase_applet_config.xml
-        val databaseId = getString(R.string.firestore_database_id)
-        viewModel.connectToLiveFirestore(databaseId)
-
-        // Attempt non-blocking silent auto-sign-in for authorized Google accounts
-        viewModel.attemptAutoSignIn(this)
-
         setContent {
             TalentNexusTheme {
                 MainScreen(viewModel = viewModel)
             }
+        }
+
+        // Post live Cloud Firestore connection and auto-sign-in after first layout/render pass
+        // to prevent main-thread cold-start freeze and SurfaceSyncGroup 1000ms timeout
+        window.decorView.post {
+            val databaseId = getString(R.string.firestore_database_id)
+            viewModel.connectToLiveFirestore(databaseId)
+            viewModel.attemptAutoSignIn(this)
         }
     }
 

@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jobportal.BuildConfig
 import com.example.jobportal.data.model.*
+import com.example.jobportal.data.payment.CashfreeCheckoutManager
+import com.example.jobportal.data.payment.CashfreeCheckoutResult
 import com.example.jobportal.data.repository.AuthRepository
 import com.example.jobportal.data.repository.AuthUiState
 import com.example.jobportal.data.repository.AuthUser
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     val repository: JobPortalRepository = JobPortalRepository(),
     val authRepository: AuthRepository? = try { AuthRepository() } catch (e: Throwable) { null },
+    val cashfreeCheckoutManager: CashfreeCheckoutManager = CashfreeCheckoutManager(),
     private val isDebugBuild: Boolean = run {
         try {
             BuildConfig.DEBUG
@@ -51,17 +54,7 @@ class MainViewModel(
     val isDataLoading: StateFlow<Boolean> = repository.isLoading
     val dataSourceErrorMessage: StateFlow<String?> = repository.errorMessage
 
-    init {
-        try {
-            if (com.google.firebase.FirebaseApp.getInstance() != null) {
-                if (repository.connectionState.value !is com.example.jobportal.data.repository.CloudConnectionState.Connected) {
-                    connectToLiveFirestore(JobPortalRepository.DEFAULT_FIRESTORE_DATABASE_ID)
-                }
-            }
-        } catch (_: Throwable) {
-            // Outside Android environment or before FirebaseApp.initializeApp; deferred to MainActivity.onCreate
-        }
-    }
+
 
     // Authentication State
     val authUser: StateFlow<AuthUser?> = authRepository?.currentUser ?: MutableStateFlow<AuthUser?>(null).asStateFlow()
@@ -73,6 +66,9 @@ class MainViewModel(
     // Referral & Premium Dialog / Screen States
     private val _showPremiumAccessDialog = MutableStateFlow(false)
     val showPremiumAccessDialog: StateFlow<Boolean> = _showPremiumAccessDialog.asStateFlow()
+
+    private val _checkoutUiState = MutableStateFlow<CheckoutUiState>(CheckoutUiState.Idle)
+    val checkoutUiState: StateFlow<CheckoutUiState> = _checkoutUiState.asStateFlow()
 
     private val _showReferralDashboard = MutableStateFlow(false)
     val showReferralDashboard: StateFlow<Boolean> = _showReferralDashboard.asStateFlow()
@@ -157,12 +153,18 @@ class MainViewModel(
             val result = authRepository?.signInWithGoogle(activity)
             if (result?.isSuccess == true) {
                 val user = result.getOrNull()
-                _snackbarMessage.value = "Signed in as ${user?.displayName ?: "Google User"}"
+                _snackbarMessage.value = "Welcome, ${user?.displayName ?: "Candidate"}! 🎉"
                 _showAuthDialog.value = false
+                // Pop up referral screen upon login so user can immediately invite or apply codes
+                if (!incomingReferralCode.value.isNullOrBlank()) {
+                    _showEnterReferralCodeDialog.value = true
+                } else {
+                    _showReferralDashboard.value = true
+                }
             } else if (result?.isFailure == true) {
                 val exception = result.exceptionOrNull()
                 if (exception !is GetCredentialCancellationException) {
-                    _snackbarMessage.value = exception?.localizedMessage ?: "Sign-in failed"
+                    _snackbarMessage.value = exception?.localizedMessage ?: "Sign-in could not be completed. Please try again."
                 }
             }
         }
@@ -170,23 +172,29 @@ class MainViewModel(
 
     fun attemptAutoSignIn(context: Context) {
         viewModelScope.launch {
-            authRepository?.attemptAutoSignIn(context)
+            val success = authRepository?.attemptAutoSignIn(context) == true
+            if (success) {
+                val user = authRepository?.currentUser?.value
+                if (user != null) {
+                    _snackbarMessage.value = "Welcome back, ${user.displayName}! 👋"
+                }
+            }
         }
     }
 
     fun signOut(context: Context) {
         viewModelScope.launch {
             authRepository?.signOut(context)
-            _snackbarMessage.value = "Signed out of Google session"
+            _snackbarMessage.value = "You have signed out."
         }
     }
 
     fun connectToLiveFirestore(databaseId: String = JobPortalRepository.DEFAULT_FIRESTORE_DATABASE_ID) {
         try {
             repository.switchToFirestore(databaseId)
-            _snackbarMessage.value = "Connected to भर्ती-App Firestore live cloud ($databaseId)"
+            _snackbarMessage.value = "Connected to live jobs ✨"
         } catch (e: Throwable) {
-            _snackbarMessage.value = "Failed to connect to cloud: ${e.localizedMessage}"
+            _snackbarMessage.value = "Could not connect to live cloud. Please check your internet connection."
         }
     }
 
@@ -206,7 +214,7 @@ class MainViewModel(
 
     fun enableDemoMode() {
         repository.switchToDemo()
-        _snackbarMessage.value = "Switched to demo mode"
+        _snackbarMessage.value = "Switched to Demo Mode"
     }
 
     fun setTab(tab: String) {
@@ -341,7 +349,7 @@ class MainViewModel(
         if (clean.isNotBlank()) {
             _incomingReferralCode.value = clean
             _showEnterReferralCodeDialog.value = true
-            _snackbarMessage.value = "Referral invite detected: $clean"
+            _snackbarMessage.value = "Referral invite detected: $clean 🎁"
         }
     }
 
@@ -369,9 +377,9 @@ class MainViewModel(
     fun applyReferralCode(code: String): Boolean {
         val success = repository.applyReferralAttribution(code)
         if (success) {
-            _snackbarMessage.value = "Referral code '$code' applied successfully!"
+            _snackbarMessage.value = "Referral code applied! You earned ₹5 bonus 🎉"
         } else {
-            _snackbarMessage.value = repository.errorMessage.value ?: "Could not apply referral code"
+            _snackbarMessage.value = repository.errorMessage.value ?: "Could not apply referral code. Please check the code and try again."
         }
         return success
     }
@@ -383,9 +391,9 @@ class MainViewModel(
     fun verifyPremiumPayment(paymentId: String, providerRef: String): Boolean {
         val success = repository.processVerifiedPayment(paymentId, providerRef)
         if (success) {
-            _snackbarMessage.value = "Premium membership activated! Verified payment ref: $providerRef"
+            _snackbarMessage.value = "Premium activated! 🌟 Enjoy direct recruiter reach and priority screening."
         } else {
-            _snackbarMessage.value = repository.errorMessage.value ?: "Payment verification failed"
+            _snackbarMessage.value = repository.errorMessage.value ?: "Payment could not be verified. Please try again."
         }
         return success
     }
@@ -393,9 +401,9 @@ class MainViewModel(
     fun submitRedemptionRequest(amount: Int, payoutAccount: String): Boolean {
         val success = repository.requestWithdrawal(amount, payoutAccount)
         if (success) {
-            _snackbarMessage.value = "Redemption request for ₹$amount submitted for review"
+            _snackbarMessage.value = "Withdrawal request for ₹$amount submitted successfully! 👍"
         } else {
-            _snackbarMessage.value = repository.errorMessage.value ?: "Redemption request failed"
+            _snackbarMessage.value = repository.errorMessage.value ?: "Withdrawal request could not be submitted. Please try again."
         }
         return success
     }
@@ -409,4 +417,76 @@ class MainViewModel(
         }
         return success
     }
+
+    fun resetCheckoutState() {
+        _checkoutUiState.value = CheckoutUiState.Idle
+    }
+
+    fun startCashfreeCheckout(activity: Activity) {
+        viewModelScope.launch {
+            _checkoutUiState.value = CheckoutUiState.CreatingOrder
+            val result = repository.createCashfreePremiumOrder()
+            result.onSuccess { session ->
+                _checkoutUiState.value = CheckoutUiState.LaunchCheckout(session.orderId, session.paymentSessionId)
+                cashfreeCheckoutManager.startCheckout(
+                    activity = activity,
+                    orderId = session.orderId,
+                    paymentSessionId = session.paymentSessionId
+                ) { checkoutResult ->
+                    when (checkoutResult) {
+                        is CashfreeCheckoutResult.Success -> {
+                            // On SDK callback, invoke authoritative backend verification using returned orderId
+                            verifyCashfreePaymentWithServer(checkoutResult.orderId)
+                        }
+                        is CashfreeCheckoutResult.Cancelled -> {
+                            _checkoutUiState.value = CheckoutUiState.PaymentCancelled(checkoutResult.orderId, checkoutResult.message)
+                            _snackbarMessage.value = "Cashfree payment cancelled"
+                        }
+                        is CashfreeCheckoutResult.Failure -> {
+                            _checkoutUiState.value = CheckoutUiState.PaymentFailed(checkoutResult.orderId, checkoutResult.message)
+                            _snackbarMessage.value = "Cashfree payment failed: ${checkoutResult.message}"
+                        }
+                    }
+                }
+            }.onFailure { e ->
+                val errorMsg = e.localizedMessage ?: "Failed to create Cashfree order on server"
+                _checkoutUiState.value = CheckoutUiState.PaymentFailed("", errorMsg)
+                _snackbarMessage.value = errorMsg
+            }
+        }
+    }
+
+    fun verifyCashfreePaymentWithServer(orderId: String, providerRef: String? = null) {
+        viewModelScope.launch {
+            _checkoutUiState.value = CheckoutUiState.VerifyingPayment
+            val verification = repository.verifyCashfreePayment(orderId, providerRef)
+            when (verification.status) {
+                "SUCCESS" -> {
+                    if (verification.isPremium) {
+                        _checkoutUiState.value = CheckoutUiState.PaymentSuccess(orderId)
+                        _snackbarMessage.value = "Premium membership activated! Order: $orderId"
+                    } else {
+                        _checkoutUiState.value = CheckoutUiState.PaymentPending(orderId, "Payment received. Finalizing premium access...")
+                    }
+                }
+                "PENDING" -> {
+                    _checkoutUiState.value = CheckoutUiState.PaymentPending(orderId, verification.message ?: "Payment is pending gateway confirmation.")
+                }
+                else -> {
+                    _checkoutUiState.value = CheckoutUiState.PaymentFailed(orderId, verification.message ?: "Payment verification failed.")
+                }
+            }
+        }
+    }
+}
+
+sealed interface CheckoutUiState {
+    object Idle : CheckoutUiState
+    object CreatingOrder : CheckoutUiState
+    data class LaunchCheckout(val orderId: String, val paymentSessionId: String) : CheckoutUiState
+    object VerifyingPayment : CheckoutUiState
+    data class PaymentSuccess(val orderId: String) : CheckoutUiState
+    data class PaymentPending(val orderId: String, val message: String) : CheckoutUiState
+    data class PaymentCancelled(val orderId: String, val message: String) : CheckoutUiState
+    data class PaymentFailed(val orderId: String, val message: String) : CheckoutUiState
 }
